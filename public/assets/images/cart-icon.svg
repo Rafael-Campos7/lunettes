@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63.321" height="63.152" viewBox="0 0 63.321 63.152">
+    <defs>
+        <filter id="prefix__Ellipse_1" width="38" height="38" x="0" y="25.152" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur result="blur" stdDeviation="1.5"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <style>
+            .prefix__cls-1{fill:#fff}
+        </style>
+    </defs>
+    <g id="prefix__Group_8" data-name="Group 8" transform="translate(-1856.5 -42.348)">
+        <path id="prefix__Path_7" d="M1166.641-685.951h-8.43v-3.338a10.305 10.305 0 0 0-10.228-10.357 10.305 10.305 0 0 0-10.228 10.357v3.338h-8.43a2.751 2.751 0 0 0-2.752 2.743v27.408a6.456 6.456 0 0 0 6.444 6.453h29.933a6.456 6.456 0 0 0 6.444-6.453v-27.412a2.751 2.751 0 0 0-2.753-2.739zm-26.134 11.421a2.755 2.755 0 0 0 2.752-2.752v-3.164h9.448v3.164a2.755 2.755 0 0 0 2.752 2.752 2.755 2.755 0 0 0 2.752-2.752v-3.164h5.678v24.65a.945.945 0 0 1-.939.949h-29.933a.945.945 0 0 1-.94-.949v-24.65h5.678v3.164a2.755 2.755 0 0 0 2.752 2.752zm2.752-11.421v-3.338a4.8 4.8 0 0 1 4.724-4.853 4.8 4.8 0 0 1 4.724 4.853v3.338z" class="prefix__cls-1" data-name="Path 7" transform="translate(750.428 741.994)"/>
+        <g id="prefix__Group_7" data-name="Group 7" transform="translate(66 -15)">
+            <g transform="translate(1790.5 57.35)">
+                <circle id="prefix__Ellipse_1-2" cx="14.5" cy="14.5" r="14.5" class="prefix__cls-1" data-name="Ellipse 1" transform="translate(4.5 26.65)"/>
+            </g>
+            <text id="prefix___23" data-name="23" transform="translate(1800 104)" style="font-size:16px;font-family:RobotoMono-Bold,Roboto Mono;font-weight:700">
+                <tspan x="0" y="0">23</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
