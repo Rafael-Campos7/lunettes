@@ -5,30 +5,35 @@ export const Container = styled.div`
   width: 100%;
   z-index: 999;
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+`
 
-    padding: 20px 30px;
-    margin-bottom: 30px;
+interface MenuContentProps {
+  smallMenu: boolean;
+}
 
-    button {
-      background: none;
-      border: none;
-      width: 30px;
-      height: 30px;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
+export const MenuContent = styled.div<MenuContentProps>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  animation: 0.3s ease 0s 1 normal both running jKeqlt;
+  padding: ${props => props.smallMenu === true ? '5px 30px' : '20px 30px'};
+  background: ${props => props.smallMenu === true ? '#0f0f0f' : 'none'} ;
 
   img {
-    width: 200px;
-    height: 89px;
+    width: ${props => props.smallMenu === true ? '50px' : '200px'};
+    height: ${props => props.smallMenu === true ? '50px' : '89px'};
   }
-  
+
+  button {
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 `

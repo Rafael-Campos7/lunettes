@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import { Container } from "./styles";
+import { Container, MenuContent } from "./styles";
 
 export function Menu() {
-  const [menu, setMenu] = useState("") 
+  const [smallMenu, setsmallMenu] = useState(false) 
 
   function handleScrollMove() {
-     const offSet = window.pageYOffset
+    const offSet = window.pageYOffset
 
     if (offSet > 100) {
-      setMenu("true") 
-      console.log(menu, offSet);
+      setsmallMenu(true)
     } else {
-      setMenu("false")
-      console.log(menu);
-      
+      setsmallMenu(false)
     }
-    ;
-    
   }
 
   useEffect(() => {
@@ -29,15 +24,15 @@ export function Menu() {
 
   return (
     <Container>
-      <div>
+      <MenuContent smallMenu={smallMenu} >
         <button type="button">
           <img src="./assets/images/menu-icon.svg" alt="Ícone do menu" />
         </button>
-        <img src="./assets/images/logo-lunettes.svg" alt="Logo Lunettes" />
+        <img src={`./assets/images/${ smallMenu ? 'logotipo-negativo.png' : 'logo-lunettes.svg'}`} alt="Logo Lunettes" />
         <button type="button">
-          <img src="./assets/images/cart-icon.svg" alt="Ícone da sacola" />
+          <img src="./assets/images/bag.svg" alt="Ícone da sacola" />
         </button>
-      </div>
+      </MenuContent>
     </Container>
   )
 }
