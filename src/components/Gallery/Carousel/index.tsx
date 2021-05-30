@@ -6,6 +6,17 @@ import "slick-carousel/slick/slick-theme.css";
 import { SliderContainer, NextArrow, PrevArrow} from './styles'
 
 export function Carousel() {
+  const imagesPaths = [
+    "./assets/images/slider-images/boy.png",
+    "./assets/images/slider-images/dog.png",
+    "./assets/images/slider-images/girls.png",
+    "./assets/images/slider-images/man.png",
+    "./assets/images/slider-images/boy.png",
+    "./assets/images/slider-images/dog.png",
+    "./assets/images/slider-images/girls.png",
+    "./assets/images/slider-images/man.png",
+  ]
+
   const settings: Settings = {
     dots: false,
     infinite: true,
@@ -54,30 +65,15 @@ export function Carousel() {
           nextArrow={ <NextArrow><BiChevronRight /></NextArrow> }
           prevArrow={ <PrevArrow><BiChevronLeft /></PrevArrow> }
         > 
-          <div>
-            <img src="./assets/images/slider-images/boy.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/dog.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/girls.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/man.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/boy.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/dog.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/girls.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/man.png" />
-          </div>
+          {
+            imagesPaths.map(path => {
+              return (
+                <div>
+                  <img src={path} />
+                </div>  
+              )
+            })
+          }
         </Slider>
       </SliderContainer>  
   )
