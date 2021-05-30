@@ -19,7 +19,7 @@ export default createGlobalStyle`
   }
 
   body {
-    overflow: hidden scroll;
+    overflow: ${props => props.theme.overflow};
   }
 
   body, input, textarea, button {
