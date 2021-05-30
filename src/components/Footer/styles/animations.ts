@@ -1,9 +1,9 @@
 import { keyframes } from "styled-components";
 
-export const iconAnimation = keyframes`
-  0%,
+export const footerIconAnimation = keyframes`
   100% {
-    transform:translateX(0);transform-origin:50% 50%
+    transform:translateX(0);
+    transform-origin:50% 50%
   }
   15% {
     transform:translateX(-5px) rotate(-6deg)

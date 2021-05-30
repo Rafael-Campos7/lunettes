@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { iconAnimation } from "../../styles/animations";
+import { footerIconAnimation } from "./animations";
 
 export const Container = styled.footer`
   display: flex;
@@ -64,7 +64,7 @@ export const Container = styled.footer`
         margin-right: 20px;
 
         &:hover {
-          animation: 0.8s ease 0s 1 normal both running ${iconAnimation};
+          animation: 0.8s ease 0s 1 normal both running ${footerIconAnimation};
         }
       }
     }
