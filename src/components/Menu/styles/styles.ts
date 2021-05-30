@@ -53,7 +53,10 @@ export const Header = styled.div<ContentProps>`
   padding: ${props => props.smallMenu === true ? '5px 30px' : '20px 30px'};
   ${props => (props.openMenu || props.smallMenu) && css`background: #0f0f0f;`}
   ${props => props.openMenu && css`border-bottom: 1px solid #1e1e1e;`}
-  ${props => props.smallMenu && css`animation: ${slideInTop} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;`}
+  ${props => props.smallMenu && css`
+    -webkit-animation: ${slideInTop} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: ${slideInTop} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  `}
 
   & .logo-lunettes {
     width: ${props => props.smallMenu === true ? '50px' : '200px'};
@@ -92,8 +95,10 @@ export const Header = styled.div<ContentProps>`
     left: 0px;
     ${props => props.openMenu 
       ? css`
+        -webkit-animation: ${iconOut} 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
         animation: ${iconOut} 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     ` : css`
+        -webkit-animation: ${iconIn} 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
         animation: ${iconIn} 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
     `}
   }
@@ -172,8 +177,10 @@ export const GlassLink = styled.li<GlassLinkProps>`
   margin-top: 30px;
   cursor: pointer;
   animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
+  -webkit-animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
 
   &:hover img {
+    -webkit-animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};
     animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};  
   }
 
