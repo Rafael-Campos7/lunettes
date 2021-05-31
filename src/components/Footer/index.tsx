@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <Container>
       <div className="content">
-        <img src="./assets/images/logo-lunettes.svg" alt="Logo Lunettes" className="logoLunnetes" />
+        <nav><img src="./assets/images/logo-lunettes.svg" alt="Logo Lunettes" className="logoLunnetes" /></nav>
         <nav>
           <h4>Solar</h4>
           <ul>

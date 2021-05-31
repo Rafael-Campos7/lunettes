@@ -50,13 +50,14 @@ export const Header = styled.div<ContentProps>`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
-  padding: ${props => props.smallMenu === true ? '5px 30px' : '20px 30px'};
+  padding: ${props => props.smallMenu === true ? '8px 30px' : '20px 30px'};
   ${props => (props.openMenu || props.smallMenu) && css`background: #0f0f0f;`}
   ${props => props.openMenu && css`border-bottom: 1px solid #1e1e1e;`}
   ${props => props.smallMenu && css`
     -webkit-animation: ${slideInTop} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: ${slideInTop} 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   `}
+
 
   & .logo-lunettes {
     width: ${props => props.smallMenu === true ? '50px' : '200px'};
@@ -102,6 +103,21 @@ export const Header = styled.div<ContentProps>`
         animation: ${iconIn} 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
     `}
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 8px 15px;
+
+    & .logo-lunettes {
+      width: ${props => props.smallMenu === true ? '45px' : '120px'};
+      height: ${props => props.smallMenu === true ? '45px' : '53px'};
+    }
+
+    button {
+      height: 25px;
+      width: 25px;
+    }
+  }
+
 `
 
 export const Content = styled.div`
@@ -147,6 +163,7 @@ export const Content = styled.div`
 
   & .glassesContainer {
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     margin-bottom: 50px;
 
@@ -162,11 +179,47 @@ export const Content = styled.div`
       }
     }
 
+    nav {
+      width: 100%;
+    }
+
     ul {
       display: flex;
+      justify-content: space-space-around;
       flex-wrap: wrap;
       width: 80%;
     }  
+
+    img {
+      max-width: 150px;
+      height: 60px;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    padding: 0px 15px 20vh;
+    margin-bottom: 30px;
+
+    & .buttonContainer {
+      a {
+        font-size: 24px;
+      }
+    }
+
+    & .glassesContainer {
+      h2 {
+        font-size: 24px;
+      }
+      
+      ul {
+        width: 100%;
+      }
+
+      img {
+        max-width: 100px;
+        height: 40px;
+      }
+    }
   }
 `
 
@@ -176,14 +229,14 @@ export const GlassLink = styled.li<GlassLinkProps>`
   align-items: flex-start;
   justify-content: center;
   flex-basis: 20%;
-  margin-top: 30px;
+  margin: 30px 20px 0px 0px;
   cursor: pointer;
   animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
   -webkit-animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
 
   &:hover img {
     -webkit-animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};
-    animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};  
+    animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};
   }
 
   &:hover span {
@@ -215,5 +268,11 @@ export const GlassLink = styled.li<GlassLinkProps>`
       transition: all 0.2s linear 0s;
       z-index: -1;
     }  
+  }
+
+  @media screen and (max-width: 720px) {
+    span {
+      width: 100px;
+    }
   }
 `

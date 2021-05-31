@@ -5,7 +5,7 @@ export function Information() {
     <Container>
       <h3>Como Funciona</h3>
       <a href="https://youtu.be/QCZlSUfjDVk" target="_blank" >assistir video explicativo</a>
-      <div>
+      <div className="container">
         <div>
           <img src="./assets/images/heart-icon.svg" alt="Ícone de Coração" />
           <h4>Sacola</h4>
