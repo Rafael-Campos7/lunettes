@@ -6,15 +6,39 @@ import "slick-carousel/slick/slick-theme.css";
 import { SliderContainer, NextArrow, PrevArrow} from './styles'
 
 export function Carousel() {
-  const imagesPaths = [
-    "./assets/images/slider-images/boy.png",
-    "./assets/images/slider-images/dog.png",
-    "./assets/images/slider-images/girls.png",
-    "./assets/images/slider-images/man.png",
-    "./assets/images/slider-images/boy.png",
-    "./assets/images/slider-images/dog.png",
-    "./assets/images/slider-images/girls.png",
-    "./assets/images/slider-images/man.png",
+  const images = [
+    {
+      path:"./assets/images/slider-images/boy.png",
+      alt:"Jovem de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/dog.png",
+      alt:"Cachorro de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/girls.png",
+      alt:"Três mulheres"
+    },
+    {
+      path:"./assets/images/slider-images/man.png",
+      alt:"Homem com óculos"
+    },
+    {
+      path:"./assets/images/slider-images/boy.png",
+      alt:"Jovem de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/dog.png",
+      alt:"Cachorro de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/girls.png",
+      alt:"Três mulheres"
+    },
+    {
+      path:"./assets/images/slider-images/man.png",
+      alt:"Homem com óculos"
+    },
   ]
 
   const settings: Settings = {
@@ -66,10 +90,10 @@ export function Carousel() {
           prevArrow={ <PrevArrow><BiChevronLeft /></PrevArrow> }
         > 
           {
-            imagesPaths.map(path => {
+            images.map(image => {
               return (
                 <div>
-                  <img src={path} />
+                  <img src={image.path} alt={image.alt}/>
                 </div>  
               )
             })

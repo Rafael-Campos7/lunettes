@@ -144,7 +144,7 @@ export const Content = styled.div`
     margin-bottom: 50px;
     animation: ${textAnimation} 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.3s both;
 
-    a {
+    button {
       font-size: 32px;
       text-transform: uppercase;
       font-family: "Monument";
