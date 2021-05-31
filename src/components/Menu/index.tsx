@@ -55,7 +55,7 @@ export function Menu({ toggleTheme }: MenuProps) {
       {openMenu &&
         <Content>
           <div className="buttonContainer">
-            <a type="button" onClick={handleMenu} href="#">Home</a>
+            <a onClick={handleMenu} href="#">Home</a>
           </div>
           <div className="glassesContainer" >
             <h2><a href="/">Óculos de Grau</a></h2>

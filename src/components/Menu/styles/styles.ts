@@ -126,21 +126,23 @@ export const Content = styled.div`
 
   & .buttonContainer {
     margin-bottom: 50px;
-
-    a {
-    font-size: 32px;
-    text-transform: uppercase;
-    font-family: "Monument";
-    color: #ffffff;
-    background: transparent;
-    border: none;
-    cursor: pointer;  
     animation: ${textAnimation} 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.3s both;
 
-    &:hover {
-      opacity: 0.5;
-    }
-   }
+    a {
+      font-size: 32px;
+      text-transform: uppercase;
+      font-family: "Monument";
+      color: #ffffff;
+      background: none;
+      border: none;
+      cursor: pointer;  
+      
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }  
+   
   }
 
   & .glassesContainer {

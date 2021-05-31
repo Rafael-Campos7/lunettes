@@ -21,24 +21,24 @@ export const glassIconAnimation = keyframes`
     transform-origin:50% 50%;
   }
   15% {
-    -webkit-transform:translateX(-12px) rotate(-6deg)
-    transform:translateX(-12px) rotate(-6deg)
+    -webkit-transform:translateX(-12px) rotate(-6deg);
+    transform:translateX(-12px) rotate(-6deg);
   }
   30% {
-    -webkit-transform:translateX(23px) rotate(6deg)
-    transform:translateX(23px) rotate(6deg)
+    -webkit-transform:translateX(23px) rotate(6deg);
+    transform:translateX(23px) rotate(6deg);
   }
   45% {
-    -webkit-transform:translateX(-13px) rotate(-3.6deg)
-    transform:translateX(-13px) rotate(-3.6deg)
+    -webkit-transform:translateX(-13px) rotate(-3.6deg);
+    transform:translateX(-13px) rotate(-3.6deg);
   }
   60% {
-    -webkit-transform:translateX(15px) rotate(2.4deg)
-    transform:translateX(15px) rotate(2.4deg)
+    -webkit-transform:translateX(15px) rotate(2.4deg);
+    transform:translateX(15px) rotate(2.4deg);
   }
   75% {
-    -webkit-transform:translateX(-12px) rotate(-1.2deg)
-    transform:translateX(-12px) rotate(-1.2deg)
+    -webkit-transform:translateX(-12px) rotate(-1.2deg);
+    transform:translateX(-12px) rotate(-1.2deg);
   }
 `
 
