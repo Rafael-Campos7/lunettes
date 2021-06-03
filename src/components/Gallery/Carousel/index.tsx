@@ -92,7 +92,7 @@ export function Carousel() {
           {
             images.map(image => {
               return (
-                <div>
+                <div key={image.path}>
                   <img src={image.path} alt={image.alt}/>
                 </div>  
               )
