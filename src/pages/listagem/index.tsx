@@ -2,9 +2,10 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next';
 import { data } from './data'
 import { BiChevronRight } from "react-icons/bi";
+import { Background } from '../../components/Background'
 import { Product } from '../../components/Product'
 import { Filter } from '../../components/Filter';
-import { BackgroundContainer, Container, CategoryName, Content, ContentContainer } from "./styles";
+import { Container, CategoryName, Content, ContentContainer } from "./styles";
 
 type Image = {
   id: string;
@@ -42,7 +43,7 @@ export default function Listing({ products }: ListingProps) {
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
 
-      <BackgroundContainer />
+      <Background />
       <Container>
         <CategoryName>
           <div>
