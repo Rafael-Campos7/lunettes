@@ -1,13 +1,12 @@
 import { useState } from 'react'
-
 import type { AppProps } from 'next/app'
-
 import { ThemeProvider, } from 'styled-components'
 import menuClosed from '../styles/themes/menuClosed'
 import menuOpen from '../styles/themes/menuOpen'
 import GlobalStyle from '../styles/global'
 import { Menu } from '../components/Menu'
 import { Footer } from '../components/Footer'
+import { Gallery } from '../components/Gallery'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState(menuClosed)
@@ -22,7 +21,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <header>
         <Menu toggleTheme={changeTheme} />
       </header>
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+        <Gallery />
+      </main>
       <Footer />
     </ThemeProvider>
   )
