@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next';
 import { data } from './data'
-import { BiChevronRight } from "react-icons/bi";
 import { Background } from '../../components/Background'
 import { Product } from '../../components/Product'
 import { Filter } from '../../components/Filter';
-import { Container, CategoryName, Content, ContentContainer } from "./styles";
+import { Container, Content, ContentContainer } from "./styles";
+import { BreadCrumb } from '../../components/BreadCrumb';
 
 type Image = {
   id: string;
@@ -45,14 +45,7 @@ export default function Listing({ products }: ListingProps) {
 
       <Background />
       <Container>
-        <CategoryName>
-          <div>
-            <span>Home</span>
-            <BiChevronRight />
-            <span>Grau</span>
-          </div>
-          <h2>Oval</h2>
-        </CategoryName>
+        <BreadCrumb title="Oval" trail={["Home", "Grau"]} />
         <Filter />
         <ContentContainer>
           <Content>
