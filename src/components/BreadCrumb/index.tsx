@@ -10,16 +10,17 @@ export function BreadCrumb({ title, trail }: BreadCrumbProps) {
   return (
     <Container>
       <div>
-        {trail.map( (path, index) => {
-          return (
-            <>
-              <span>{path}</span>
-              {(index  !== trail.length - 1) && <BiChevronRight />}
-            </>
+      {trail.map((path, index) => {
+        return (
+          <div key={path[0]}>
+            <span>{path}</span>
+            {(index !== trail.length - 1) && <BiChevronRight />}
+          </div>
           )
         })}
-      </div>
+      </div> 
       <h2>{title}</h2>
+        
     </Container>
-  )
+  )      
 }
