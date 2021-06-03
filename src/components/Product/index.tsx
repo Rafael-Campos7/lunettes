@@ -1,6 +1,6 @@
-import Slider, { Settings } from 'react-slick'
 import { FiHeart } from "react-icons/fi";
-import { Container, Name, Id, Price, Details, SliderContainer, DotsContainer, DotButton, ImageContainer, DiscountStamp } from './styles'
+import { ProductGallery } from "./ProductGallery";
+import { Container, Name, Id, Price, Details, DiscountStamp } from './styles'
 
 type Image = {
   id: string;
@@ -32,44 +32,10 @@ interface ProductProps {
 }
 
 export function Product({ product }: ProductProps) {
-  const settings: Settings = {
-    arrows: false,
-    dots: true,
-    dotsClass: "dots",
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    appendDots: (dots) => (
-      <DotsContainer>
-        {dots}
-      </DotsContainer>
-    ),
-    customPaging: i => (
-      <DotButton productColor={product.images[i].color} />
-    )
-  };
-
   return (
     <Container>
       {product.discount > 0 && <DiscountStamp>{product.discount}% <span>OFF</span></DiscountStamp>}
-      <SliderContainer>
-        <Slider {...settings}>
-          {
-            product.images.map((image, index) => {
-              return (
-                <ImageContainer 
-                  key={image.id} 
-                  isFirstImage={(index == 0)}
-                  imageHover={product.images[1].allImages.md} 
-                >
-                  <img src={image.allImages.md} alt="Óculos Lunettes" />
-                </ImageContainer>
-              )
-            })
-          }
-        </Slider>
-      </SliderContainer>
+      <ProductGallery images={product.images} />
       <Name>
         {product.name}
         {(product.isNewCollection && <span>Nova coleção</span>)}
