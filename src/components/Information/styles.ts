@@ -12,7 +12,6 @@ export const Container = styled.section`
     text-transform: uppercase;
     font-family: "Monument";
     font-size: 42px;
-    line-height: 51px;
   }
 
   a {
@@ -20,7 +19,7 @@ export const Container = styled.section`
     padding: 5px 10px;
     border-radius: 4px;
     text-decoration: none;
-    transition: background 0.2s ease 0s;
+    transition:  0.2s ease 0s;
     border: 1px solid var(--gray-200);
     color: var(--gray-200);
 
@@ -30,7 +29,7 @@ export const Container = styled.section`
     }
   }
 
-  div {
+  & .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,7 +37,6 @@ export const Container = styled.section`
     margin-top: 40px;
 
     div {
-      margin: 0;
       display: flex;
       flex-flow: column nowrap;
       place-items: center baseline;
@@ -61,6 +59,43 @@ export const Container = styled.section`
         font-size: 16px;
         text-align: center;
         color: var(--gray-200);
+      }
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    padding: 40px 0px;
+
+    h3 {
+      font-size: 24px;
+    }
+
+    a {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    & .container {
+      margin-top: 30px;
+      flex-direction: column;
+      width: 100%;
+
+      div {
+        margin: 20px 0px;
+      
+        img {
+          width: 45px;
+          height: 45px;
+        }
+
+        h4 {
+         margin: 15px 0px;
+         font-size: 18px;
+        }
+
+        p {
+          font-size: 14px;
+        }
       }
     }
   }

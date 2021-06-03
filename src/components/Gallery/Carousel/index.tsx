@@ -6,6 +6,41 @@ import "slick-carousel/slick/slick-theme.css";
 import { SliderContainer, NextArrow, PrevArrow} from './styles'
 
 export function Carousel() {
+  const images = [
+    {
+      path:"./assets/images/slider-images/boy.png",
+      alt:"Jovem de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/dog.png",
+      alt:"Cachorro de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/girls.png",
+      alt:"Três mulheres"
+    },
+    {
+      path:"./assets/images/slider-images/man.png",
+      alt:"Homem com óculos"
+    },
+    {
+      path:"./assets/images/slider-images/boy.png",
+      alt:"Jovem de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/dog.png",
+      alt:"Cachorro de óculos"
+    },
+    {
+      path:"./assets/images/slider-images/girls.png",
+      alt:"Três mulheres"
+    },
+    {
+      path:"./assets/images/slider-images/man.png",
+      alt:"Homem com óculos"
+    },
+  ]
+
   const settings: Settings = {
     dots: false,
     infinite: true,
@@ -54,30 +89,15 @@ export function Carousel() {
           nextArrow={ <NextArrow><BiChevronRight /></NextArrow> }
           prevArrow={ <PrevArrow><BiChevronLeft /></PrevArrow> }
         > 
-          <div>
-            <img src="./assets/images/slider-images/boy.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/dog.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/girls.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/man.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/boy.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/dog.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/girls.png" />
-          </div>
-          <div>
-            <img src="./assets/images/slider-images/man.png" />
-          </div>
+          {
+            images.map(image => {
+              return (
+                <div>
+                  <img src={image.path} alt={image.alt}/>
+                </div>  
+              )
+            })
+          }
         </Slider>
       </SliderContainer>  
   )

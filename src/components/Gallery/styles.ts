@@ -50,15 +50,28 @@ export const Section = styled.div`
   }
 
   p {
-    margin: 0 20px;
+    margin: 0px 20px;
     max-width: 460px;
     width: 100%;
     color: #ffffff;
     font-size: 24px;
     text-align: center;
-    line-height: 36px;
     opacity: 1;
     z-index: 2;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 40px 20px;
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
 `
 
