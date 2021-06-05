@@ -69,7 +69,7 @@ export const FilterOption = styled.button<FilterOptionProps>`
   line-height: 30px;
   position: relative;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: uppercase;
   color: var(--gray-200);
   border: none;
@@ -83,32 +83,32 @@ export const FilterOption = styled.button<FilterOptionProps>`
   &::after {
     content: "";
     position: absolute;
-    left: -49px;
-    width: 29px;
-    height: 29px;
-    border: 2px solid var(--gray-200);
+    left: -43px;
+    width: 35px;
+    height: 35px;
     box-sizing: border-box;
-    transition: border 0.4s;
+    border: 2px solid var(--gray-200);
+    border-radius: 5px;
     ${props => props.background && css`
       border: 2px solid var(--gray-100);
-      border-radius: 0px 3px;
     `} 
     ${props => props.active && css`
-      border: 2px solid #000000;
+      border: 3px solid #000000;
     `} 
   }
 
   &::before {
     content: "";
     position: absolute;
-    left: -45px;
-    width: 21px;
-    height: 21px;
+    left: -38px;
+    width: 25px;
+    height: 25px;
     box-sizing: border-box;
-    border-radius: 3px;
-    ${props => props.background && css`
-      background: ${props.background};
-    `};
+    border-radius: 5px;
+    background: ${props => (props?.background?.length > 7 )
+    ? `url(${props.background}) center center / cover`
+    : props.background
+  };
     ${props => (props.active && !props.background) && css`
       background: #000000;
     `}
@@ -117,8 +117,7 @@ export const FilterOption = styled.button<FilterOptionProps>`
   &:hover {
     color: #000000;
     ::after {
-      border: 2px solid #000000;
-      border-radius: 0px 3px;
+      border: 3px solid #000000;
     }
   }
 `

@@ -19,7 +19,9 @@ type Image = {
 type Product = {
   id: string;
   name: string;
-  price: string;
+  styles: string[];
+  price: number;
+  formattedPrice: string;
   discountedPrice: string;
   images: Image[];
   code: string;
@@ -44,7 +46,7 @@ export function Product({ product }: ProductProps) {
         {product.code}
       </Id>
       <Price discount={product.discount > 0}>
-        <h3 className="priceWithoutDiscount">{product.price}</h3>
+        <h3 className="priceWithoutDiscount">{product.formattedPrice}</h3>
         {(product.discount > 0) && <h3 className="priceWithDiscount" >{ product.discountedPrice }</h3>}
       </Price>
       <Details>

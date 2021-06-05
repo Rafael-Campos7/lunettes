@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Head from 'next/head'
 import { GetServerSideProps } from 'next';
 import { data } from './data'
@@ -24,7 +25,9 @@ type Image = {
 type Product = {
   id: string;
   name: string;
-  price: string;
+  styles: string[];
+  price: number;
+  formattedPrice: string;
   discountedPrice: string;
   images: Image[];
   code: string;
@@ -37,6 +40,12 @@ interface ListingProps {
 }
 
 export default function Listing({ products }: ListingProps) {
+  const [listedProducts, setListedProducts] = useState<Product[]>(products)
+
+  function handleFiltering(filteredProducts: Product[]) {
+    setListedProducts(filteredProducts)
+  }
+
   return (
     <>
       <Head>
@@ -46,10 +55,10 @@ export default function Listing({ products }: ListingProps) {
       <Background />
       <Container>
         <BreadCrumb title="Oval" trail={["Home", "Grau"]} />
-        <Filter />
+        <Filter products={products} updateListing={handleFiltering} />
         <ContentContainer>
           <Content>
-            {products.map(product => {
+            {listedProducts.map(product => {
               return (
                 <Product key={product.id} product={product} />
               )
@@ -66,7 +75,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
       id: product._id,
       name: product.productName,
-      price: new Intl.NumberFormat('pt-BR', {
+      styles: product.subcategories,
+      price: product.price,
+      formattedPrice: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
       }).format(product.price),
