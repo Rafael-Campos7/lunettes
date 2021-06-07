@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Container, FilterBySelector, FilterOption, FiltersEnabled } from './styles'
-import { filter } from './helper/filter'
 import { loadColors, loadModels, loadPrices } from './helper/loadFilters'
 import { activedFilters } from './helper/activedFilters'
 
@@ -32,7 +31,7 @@ type Product = {
 }
 
 interface FilterProps {
-  updateListing: (filteredProducts: Product[]) => void;
+  handleSelectedFilters: (selectedFilters: Filter[]) => void;
   products: Product[];
 }
 
@@ -44,7 +43,7 @@ type Filter = {
   price?: number;
 }
 
-export function Filter({ products, updateListing }: FilterProps) {
+export function Filter({ products, handleSelectedFilters }: FilterProps) {
   const [colors, setColors] = useState<Filter[]>(loadColors(products))
   const [models, setModels] = useState<Filter[]>(loadModels(products))
   const [prices, setPrices] = useState<Filter[]>(loadPrices(products))
@@ -124,14 +123,12 @@ export function Filter({ products, updateListing }: FilterProps) {
     })
     setPrices(updatedPrices)
 
-    const selecFilters = activedFilters(colors, models, prices)
-    setSelectedFilters(selecFilters)
+    setSelectedFilters(activedFilters(colors, models, prices))
   }
 
   useEffect(() => {
-    const productsUpdated = filter(selectedFilters, products)
-    updateListing(productsUpdated)
-  }, [colors, models, prices])
+    handleSelectedFilters(selectedFilters)
+  }, [selectedFilters])
 
   return (
     <Container>

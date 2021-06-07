@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { filter } from './_helper/filter'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next';
 import { data } from './data'
@@ -7,6 +8,14 @@ import { Product } from '../../components/Product'
 import { Filter } from '../../components/Filter';
 import { Container, Content, ContentContainer } from "./styles";
 import { BreadCrumb } from '../../components/BreadCrumb';
+
+type Filter = {
+  type: string;
+  value: string;
+  active: boolean;
+  background?: string;
+  price?: number;
+}
 
 type Image = {
   id: string;
@@ -42,9 +51,9 @@ interface ListingProps {
 export default function Listing({ products }: ListingProps) {
   const [listedProducts, setListedProducts] = useState<Product[]>(products)
 
-  function handleFiltering(filteredProducts: Product[]) {
-    setListedProducts(filteredProducts)
-  }
+  const handleSelectedFilters = useCallback((selectedFilters) => {
+    setListedProducts(filter(selectedFilters, products))
+  }, [products])
 
   return (
     <>
@@ -55,7 +64,7 @@ export default function Listing({ products }: ListingProps) {
       <Background />
       <Container>
         <BreadCrumb title="Oval" trail={["Home", "Grau"]} />
-        <Filter products={products} updateListing={handleFiltering} />
+        <Filter products={products} handleSelectedFilters={handleSelectedFilters} />
         <ContentContainer>
           <Content>
             {listedProducts.map(product => {
