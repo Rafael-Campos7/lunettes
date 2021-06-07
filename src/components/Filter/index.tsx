@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Container, FilterBySelector, FilterOption } from './styles'
+import { Container, FilterBySelector, FilterOption, FiltersEnabled } from './styles'
+import { filter } from './helper/filter'
+import { loadColors, loadModels, loadPrices } from './helper/loadFilters'
+import { activedFilters } from './helper/activedFilters'
 
 type Image = {
   id: string;
@@ -25,7 +28,7 @@ type Product = {
   images: Image[];
   code: string;
   isNewCollection: boolean;
-  discount: number; 
+  discount: number;
 }
 
 interface FilterProps {
@@ -42,130 +45,93 @@ type Filter = {
 }
 
 export function Filter({ products, updateListing }: FilterProps) {
-  const [colors, setColors] = useState<Filter[]>([])
-  const [models, setModels] = useState<Filter[]>([])
-  const [prices, setPrices] = useState<Filter[]>([])
+  const [colors, setColors] = useState<Filter[]>(loadColors(products))
+  const [models, setModels] = useState<Filter[]>(loadModels(products))
+  const [prices, setPrices] = useState<Filter[]>(loadPrices(products))
+  const [selectedFilters, setSelectedFilters] = useState<Filter[]>([])
   const [filterBy, setFilterBy] = useState<String>("colors")
-  const [filters, setFilters] = useState<Filter[]>([])
+  const [filters, setFilters] = useState<Filter[]>(colors)
 
-  function loadFilters() {
-    const productsColors = products.reduce((colors: Filter[], { images }) => {
-      images.forEach((image) => {
-        const alreadyExists = colors.find(color => color.value === image.color.name)
-        if (alreadyExists || image.color.name == 'NOTCOLOR' ) {
-          return;
-        }
-
-        const color = {
-          type: "color",
-          value: image.color.name,
-          background: image.color.background,
-          active: false,
-        }
-
-        colors.push(color)
-      })
-
-      return colors
-    }, [])
-    
-    const productsModels = products.reduce((models: Filter[], { styles }) => {
-      styles.forEach((style) => {
-        const alreadyExists = models.find(model => style === model.value)
-        if (alreadyExists ) {
-          return;
-        }
-
-        const model = {
-          type: "model",
-          value: style,
-          active: false,
-        }
-
-        models.push(model)
-      })
-
-      return models
-    }, [])
-
-    const producsPrices = products.reduce((maxPrices: Filter[], { price }) => {
-      const alreadyExists = maxPrices.find(maxPrice => maxPrice.price === price)
-      if (alreadyExists) {
-        return prices;
-      }
-      const maxPrice = {
-        type: "price",
-        value: `Até R$ ${price}`,
-        price: price, 
-        active: false,
-      }
-
-      maxPrices.push(maxPrice)
-
-      return prices
-    }, [])
-    
-    setColors(productsColors)
-    setModels(productsModels)
-    setPrices(producsPrices)
-  }
-
-  function handleFilterBy (filterBy: string) {
+  function handleFilterBy(filterBy: string) {
     setFilterBy(filterBy)
 
     switch (filterBy) {
-      case "colors": 
+      case "colors":
         setFilters(colors)
         break;
-      case "models": 
+      case "models":
         setFilters(models)
-        break; 
-      case "prices": 
+        break;
+      case "prices":
         setFilters(prices)
-        break; 
+        break;
     }
-  } 
+  }
 
   function handleActivateFilter(type: string, value: string) {
     switch (type) {
-      case "color": 
+      case "color":
         const colorsUpdated = colors.map(color => {
           if (color.value === value) {
             color.active ? color.active = false : color.active = true
             return color
           }
           return color
-        })  
+        })
         setColors(colorsUpdated)
-      break;
-      case "model": 
+        break;
+      case "model":
         const modelsUpdated = models.map(model => {
           if (model.value === value) {
             model.active ? model.active = false : model.active = true
             return model
           }
           return model
-        })  
+        })
         setModels(modelsUpdated)
-      break; 
-      case "price": 
+        break;
+      case "price":
         const pricesUpdated = prices.map(price => {
           if (price.value === value) {
             price.active ? price.active = false : price.active = true
             return price
           }
           return price
-        })  
+        })
         setPrices(pricesUpdated)
-      break; 
+        break;
     }
-  } 
+
+    setSelectedFilters(activedFilters(colors, models, prices))
+  }
+
+  function handleRemoveFilters() {
+    const updatedColors = colors.map((color) => {
+      color.active = false
+      return color
+    })
+    setColors(updatedColors)
+
+    const updatedModels = models.map((model) => {
+      model.active = false
+      return model
+    })
+    setModels(updatedModels)
+
+    const updatedPrices = prices.map((price) => {
+      price.active = false
+      return price
+    })
+    setPrices(updatedPrices)
+
+    const selecFilters = activedFilters(colors, models, prices)
+    setSelectedFilters(selecFilters)
+  }
 
   useEffect(() => {
-    loadFilters()
-    handleFilterBy("models")
-  }, [])
-
+    const productsUpdated = filter(selectedFilters, products)
+    updateListing(productsUpdated)
+  }, [colors, models, prices])
 
   return (
     <Container>
@@ -193,15 +159,24 @@ export function Filter({ products, updateListing }: FilterProps) {
         {filters.map(filter => {
           return (
             <li key={filter.value}>
-              <FilterOption 
-                background={filter.background} 
-                active={filter.active} 
+              <FilterOption
+                background={filter.background}
+                active={filter.active}
                 onClick={() => { handleActivateFilter(filter.type, filter.value) }}
               > {filter.value}</FilterOption>
             </li>
           )
         })}
       </ul>
+      <FiltersEnabled>
+        {selectedFilters.map((filter) => {
+            return (
+              <span key={filter.value} >{filter.value};</span>
+            )
+          })
+        }
+        {selectedFilters.length > 0 && <button onClick={handleRemoveFilters} >Limpar filtros</button>}
+      </FiltersEnabled>
     </Container>
   )
 }

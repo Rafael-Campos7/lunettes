@@ -105,7 +105,7 @@ export const FilterOption = styled.button<FilterOptionProps>`
     height: 25px;
     box-sizing: border-box;
     border-radius: 5px;
-    background: ${props => (props?.background?.length > 7 )
+    background: ${props => (props.background?.length > 7 )
     ? `url(${props.background}) center center / cover`
     : props.background
   };
@@ -118,6 +118,34 @@ export const FilterOption = styled.button<FilterOptionProps>`
     color: #000000;
     ::after {
       border: 3px solid #000000;
+    }
+  }
+`
+
+export const FiltersEnabled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  span {
+    margin-left: 5px;
+    color: var(--gray-200);
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+    color: #2840BF;
+    font-size: 12px;
+    text-decoration: underline;
+    transition: 0.2s;
+
+    &:hover {
+      color: #ef1f5f;
     }
   }
 `
