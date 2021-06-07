@@ -39,6 +39,7 @@ export default class MyDocument extends Document {
           rel="preload" 
           href="/assets/fonts/MonumentBold.otf"
           type="font/otf"
+          crossOrigin=""
           as="font"
         />
         <link rel="shortcut icon" href="assets/favicon.png" type="image/png" />
