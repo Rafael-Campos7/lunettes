@@ -35,6 +35,12 @@ export default class MyDocument extends Document {
       <Head>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700;900&display=swap" rel="stylesheet" />
+        <link 
+          rel="preload" 
+          href="/assets/fonts/MonumentBold.otf"
+          type="font/otf"
+          as="font"
+        />
         <link rel="shortcut icon" href="assets/favicon.png" type="image/png" />
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
