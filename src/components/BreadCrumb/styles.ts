@@ -27,5 +27,9 @@ export const Container = styled.div`
     font-size: 42px;
     font-family: 'Monument';
     text-transform: uppercase;
+
+    @media screen and (max-width: 720px) {
+      font-size: 28px;
+    }
   }
 `

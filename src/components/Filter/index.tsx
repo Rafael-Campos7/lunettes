@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Container, FilterBySelector, FilterOption, FiltersEnabled } from './styles'
+import { HiFilter } from 'react-icons/hi'
+import { FiX } from "react-icons/fi";
+import { Container, SelectorContainer, FilterBySelector, FilterOption, FiltersEnabled, OpenFilters, CloseFilters } from './styles/styles'
 import { loadColors, loadModels, loadPrices } from './helper/loadFilters'
 import { activedFilters } from './helper/activedFilters'
 
@@ -44,12 +46,15 @@ type Filter = {
 }
 
 export function Filter({ products, handleSelectedFilters }: FilterProps) {
+  const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false)
   const [colors, setColors] = useState<Filter[]>(loadColors(products))
   const [models, setModels] = useState<Filter[]>(loadModels(products))
   const [prices, setPrices] = useState<Filter[]>(loadPrices(products))
   const [selectedFilters, setSelectedFilters] = useState<Filter[]>([])
   const [filterBy, setFilterBy] = useState<String>("colors")
   const [filters, setFilters] = useState<Filter[]>(colors)
+
+  const numberSelectedFilters = selectedFilters.length
 
   function handleFilterBy(filterBy: string) {
     setFilterBy(filterBy)
@@ -131,49 +136,60 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
   }, [selectedFilters])
 
   return (
-    <Container>
-      <div>
-        <FilterBySelector
-          type="button"
-          onClick={() => handleFilterBy("colors")}
-          active={filterBy === "colors"}
-        >Cores
+    <>
+      <OpenFilters selectedFilters={numberSelectedFilters}>
+        <button onClick={() => {setIsFilterOptionsOpen(true)}}>
+          <HiFilter/>Filtrar
+        </button>
+      </OpenFilters>
+      <Container isFilterOptionsOpen={isFilterOptionsOpen}>
+        <CloseFilters onClick={() => {setIsFilterOptionsOpen(false)}} isFilterOptionsOpen={isFilterOptionsOpen} >
+          <FiX />
+        </CloseFilters>
+        <SelectorContainer>
+          <FilterBySelector
+            type="button"
+            onClick={() => handleFilterBy("colors")}
+            active={filterBy === "colors"}
+          >Cores
         </FilterBySelector>
-        <FilterBySelector
-          type="button"
-          onClick={() => handleFilterBy("models")}
-          active={filterBy === "models"}
-        >Modelos
+          <FilterBySelector
+            type="button"
+            onClick={() => handleFilterBy("models")}
+            active={filterBy === "models"}
+          >Modelos
         </FilterBySelector>
-        <FilterBySelector
-          type="button"
-          onClick={() => handleFilterBy("prices")}
-          active={filterBy === "prices"}
-        >Preços
+          <FilterBySelector
+            type="button"
+            onClick={() => handleFilterBy("prices")}
+            active={filterBy === "prices"}
+          >Preços
         </FilterBySelector>
-      </div>
-      <ul>
-        {filters.map(filter => {
-          return (
-            <li key={filter.value}>
-              <FilterOption
-                background={filter.background}
-                active={filter.active}
-                onClick={() => { handleActivateFilter(filter.type, filter.value) }}
-              > {filter.value}</FilterOption>
-            </li>
-          )
-        })}
-      </ul>
-      <FiltersEnabled>
-        {selectedFilters.map((filter) => {
+        </SelectorContainer>
+        <ul>
+          {filters.map(filter => {
+            return (
+              <li key={filter.value}>
+                <FilterOption
+                  background={filter.background}
+                  active={filter.active}
+                  onClick={() => { handleActivateFilter(filter.type, filter.value) }}
+                > {filter.value}</FilterOption>
+              </li>
+            )
+          })}
+        </ul>
+        <FiltersEnabled>
+          {selectedFilters.map((filter) => {
             return (
               <span key={filter.value} >{filter.value};</span>
             )
           })
-        }
-        {selectedFilters.length > 0 && <button onClick={handleRemoveFilters} >Limpar filtros</button>}
-      </FiltersEnabled>
-    </Container>
+          }
+          {selectedFilters.length > 0 && <button onClick={handleRemoveFilters} >Limpar filtros</button>}
+        </FiltersEnabled>
+      </Container>
+    </>
+
   )
 }

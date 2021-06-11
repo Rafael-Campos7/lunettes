@@ -8,8 +8,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
   width: 360px;
+
+  @media screen and (max-width: 1300px) {
+    width: 320px;
+  }
 `
 export const DiscountStamp = styled.h4`
   position: absolute;

@@ -18,6 +18,7 @@ export const SliderContainer = styled.div`
 export const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
   height: 360px;
+  cursor: grab;
 
   &:hover ::before {
     opacity: 1;
@@ -36,6 +37,15 @@ export const ImageContainer = styled.div<ImageContainerProps>`
       transition: opacity 0.5s;
     }
   `}
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 1300px) {
+    height: 320px;
+  }
 `
 
 export const DotsContainer = styled.div`
