@@ -1,7 +1,11 @@
 import { BackgroundContainer } from './styles'
 
-export function Background() {
+interface BackgroundProps {
+  height: string;
+}
+
+export function Background({ height }: BackgroundProps) {
   return (
-    <BackgroundContainer />
+    <BackgroundContainer height={height} />
   )
 }
