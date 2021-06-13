@@ -1,5 +1,5 @@
 import { FiHeart } from "react-icons/fi";
-import { ProductGallery } from "./ProductGallery";
+import { ProductGallery } from "../ProductGallery";
 import { Container, Name, Id, Price, Details, DiscountStamp } from './styles'
 
 type Image = {
@@ -37,7 +37,7 @@ export function Product({ product }: ProductProps) {
   return (
     <Container>
       {product.discount > 0 && <DiscountStamp>{product.discount}% <span>OFF</span></DiscountStamp>}
-      <ProductGallery images={product.images} />
+      <ProductGallery images={product.images} colorDots={true} />
       <Name>
         {product.name}
         {(product.isNewCollection && <span>Nova coleção</span>)}

@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+interface DotsContainerProps {
+  isColorDots: boolean;
+}
+
 interface DotButtonProps {
   productColor: {
     name: string;
@@ -14,10 +18,10 @@ interface ImageContainerProps {
 
 export const SliderContainer = styled.div`
   width: 100%;
+  height: 100%;
 `
 export const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
-  height: 360px;
   cursor: grab;
 
   &:hover ::before {
@@ -48,7 +52,7 @@ export const ImageContainer = styled.div<ImageContainerProps>`
   }
 `
 
-export const DotsContainer = styled.div`
+export const DotsContainer = styled.div<DotsContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,22 +65,35 @@ export const DotsContainer = styled.div`
     cursor: pointer;
     margin-left: 3px;
   }
-
+  
   .slick-active div {
-    ::after {
-      content: "";
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      width: 26px;
-      height: 26px;
-      border: 2px solid #000000;
-      border-radius: 3px;
+    ${props => props.isColorDots && css`
+      ::after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: 26px;
+        height: 26px;
+        border: 2px solid #000000;
+        border-radius: 3px;
     }
+    `}
+    ${props => !(props.isColorDots) && css`
+      background: #000000;
+    `}
   }
-
 `
-export const DotButton = styled.div<DotButtonProps>`
+export const Dot = styled.div`
+  margin-left: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  background: var(--gray-100);
+`
+
+export const ColorDot = styled.div<DotButtonProps>`
   display: ${props => props.productColor.name === "NOTCOLOR" ? "none" : "block"};
   background: ${props => props.productColor.background.length > 7 
     ? `url(${props.productColor.background}) center center / cover`

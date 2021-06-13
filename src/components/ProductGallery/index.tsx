@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import Slider, { Settings } from 'react-slick'
-import { SliderContainer, DotsContainer, DotButton, ImageContainer } from './styles'
+import { SliderContainer, DotsContainer, Dot, ColorDot, ImageContainer } from './styles'
 
 type Image = {
   id: string;
@@ -17,9 +19,18 @@ type Image = {
 
 interface ProductGalleryProps {
   images: Image[];
+  colorDots: boolean;
+  selectedIndex?: number;
 }
 
-export function ProductGallery({ images }: ProductGalleryProps) {
+export function ProductGallery({ images, colorDots, selectedIndex }: ProductGalleryProps) {
+  const sliderRef = useRef(null)
+  
+  useEffect(() => {
+    sliderRef.current.slickGoTo(selectedIndex)
+    
+  }, [selectedIndex])
+
   const settings: Settings = {
     arrows: false,
     dots: true,
@@ -29,27 +40,31 @@ export function ProductGallery({ images }: ProductGalleryProps) {
     slidesToShow: 1,
     slidesToScroll: 1,
     appendDots: (dots) => (
-      <DotsContainer>
+      <DotsContainer isColorDots={colorDots} >
         {dots}
       </DotsContainer>
     ),
-    customPaging: i => (
-      <DotButton productColor={images[i].color} />
-    )
+    customPaging: (i) => {
+      if (colorDots) {
+        return <ColorDot productColor={images[i].color} />
+      } else {
+        return <Dot />
+      }   
+    }
   };
 
   return (
     <SliderContainer>
-      <Slider {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {
           images.map((image, index) => {
             return (
               <ImageContainer
                 key={image.id}
                 isFirstImage={(index == 0)}
-                imageHover={images[1].allImages.md}
+                imageHover={images[1].allImages.lg}
               >
-                <img src={image.allImages.md} alt="Óculos Lunettes" />
+                <img src={image.allImages.lg} alt="Óculos Lunettes" />
               </ImageContainer>
             )
           })
