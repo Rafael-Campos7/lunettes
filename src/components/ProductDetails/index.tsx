@@ -79,7 +79,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         <ProductGallery images={product.images} colorDots={false} selectedIndex={colorIndex} />
       </Gallery>
       <Product>
-        <BreadCrumb title={product.name} trail={getBreadCrumbTrail(product)} />
+        <BreadCrumb title={product.name} trail={getBreadCrumbTrail(product.category, product.styles)} />
         <span className="code" >{product.code}</span>
         <div className="colors" >
           <Label>Cores:</Label>
