@@ -1,12 +1,12 @@
-import { ImWhatsapp } from 'react-icons/im'
-import { FiHeart } from 'react-icons/fi'
-import { BreadCrumb } from '../../components/BreadCrumb'
-import { AmountSelector } from '../../components/AmountSelector'
-import { Container, Gallery, Product, Label } from './styles'
+import { useState, useCallback } from 'react'
 import { ColorSelector } from '../ColorSelector'
 import { ProductGallery } from '../ProductGallery'
-import { useState } from 'react'
-import { useCallback } from 'react'
+import { BreadCrumb } from '../BreadCrumb'
+import { AmountSelector } from '../AmountSelector'
+import { getBreadCrumbTrail } from './helpers/getBreadCrumbTrail'
+import { ImWhatsapp } from 'react-icons/im'
+import { FiHeart } from 'react-icons/fi'
+import { Container, Gallery, Product, Label } from './styles'
 
 type Color = {
   name: string;
@@ -58,8 +58,7 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
   const [price, setPrice] = useState(product.formattedPrice)
   const [colorIndex, setColorIndex] = useState(1)
-  const categories = (product.styles.length > 1) ? "Multi Categorias" : product.styles[0]
-
+  
   const handleColorChange = useCallback((colorName) => {
     const index = product.images.findIndex((image) => image.color.name === colorName)
     setColorIndex(index)
@@ -80,7 +79,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         <ProductGallery images={product.images} colorDots={false} selectedIndex={colorIndex} />
       </Gallery>
       <Product>
-        <BreadCrumb title={product.name} trail={["Home", product.category, categories]} />
+        <BreadCrumb title={product.name} trail={getBreadCrumbTrail(product)} />
         <span className="code" >{product.code}</span>
         <div className="colors" >
           <Label>Cores:</Label>
