@@ -6,7 +6,7 @@ import { AmountSelector } from '../AmountSelector'
 import { getBreadCrumbTrail } from './helpers/getBreadCrumbTrail'
 import { ImWhatsapp } from 'react-icons/im'
 import { FiHeart } from 'react-icons/fi'
-import { Container, Gallery, Product, Label } from './styles'
+import { Container, DiscountStamp, Gallery, Product, Label, Price } from './styles'
 
 type Color = {
   name: string;
@@ -76,6 +76,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   return (
     <Container>
       <Gallery>
+        {product.discount > 0 && <DiscountStamp>{product.discount}% <span>OFF</span></DiscountStamp>}
         <ProductGallery images={product.images} colorDots={false} selectedIndex={colorIndex} />
       </Gallery>
       <Product>
@@ -87,7 +88,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </div>
         <div className="price" >
           <Label>Preço:</Label>
-          <span>{price}</span>
+          <Price discount={product.discount > 0}>
+            <h3 className="priceWithoutDiscount">{product.formattedPrice}</h3>
+            {(product.discount > 0) && <h3 className="priceWithDiscount" >{ product.discountedPrice }</h3>}
+          </Price>
         </div>
         <div className="amount" >
           <Label>Qtd:</Label>

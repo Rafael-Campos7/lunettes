@@ -1,4 +1,8 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+
+interface PriceProps {
+  discount: boolean;
+}
 
 export const Container = styled.div`
   display: grid;
@@ -7,7 +11,31 @@ export const Container = styled.div`
   gap: 55px;
   width: 1260px;
 `
+export const DiscountStamp = styled.h4`
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #EF1F5F;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 4;
+  font-size: 24px;
+  line-height: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 14px;
+    line-height: 14px;
+  }
+`
+
 export const Gallery = styled.div`
+  position: relative;
   width: 480px;
   height: 480px;
 `
@@ -36,13 +64,10 @@ export const Product = styled.div`
   }
 
   & .price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 25px;
-
-    span {
-      font-size: 24px;
-      font-weight: 700;
-      color: #000000;
-    }
   }
 
   & .amount {
@@ -90,4 +115,25 @@ export const Product = styled.div`
     }  
   }
 
+`
+
+export const Price = styled.div<PriceProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    font-family: "Roboto mono";
+    font-size: 24px;
+  }
+
+  & .priceWithoutDiscount {
+    ${props => props.discount && css`
+    text-decoration: 1px line-through;
+  `}}
+  
+  & .priceWithDiscount { 
+    margin-left: 15px;
+    color: #EF1F5F;
+  }
 `
