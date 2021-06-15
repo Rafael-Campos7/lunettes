@@ -3,7 +3,8 @@ import { GetServerSideProps } from 'next'
 import { Information } from '../../components/Information'
 import { Background } from '../../components/Background/'
 import { ProductDetails } from '../../components/ProductDetails'
-import { Container, ProductInformation, Description, Characteristics } from './styles'
+import { ProductCharacteristics } from '../../components/ProductCharacteristics'
+import { Container, ProductInformation, Description } from './styles'
 import { data } from './data'
 
 type Color = {
@@ -67,49 +68,7 @@ export default function Details({ product }: DetailsProps) {
             <h3>Descrição</h3>
             <p>{product.description}</p>
           </Description>
-          <Characteristics>
-            <h3>Detalhes</h3>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Tamanho</td>
-                  <td>Grande</td>
-                </tr>
-                <tr>
-                  <td>Material do Óculos</td>
-                  <td>Acetato</td>
-                </tr>
-                <tr>
-                  <td>Acessórios</td>
-                  <td>Estojo e flanela</td>
-                </tr>
-                <tr>
-                  <td>Medida da Frente</td>
-                  <td>14,5 cm</td>
-                </tr>
-                <tr>
-                  <td>Medida da Altura</td>
-                  <td>5,2 cm</td>
-                </tr>
-                <tr>
-                  <td>Medida da Haste</td>
-                  <td>14,5 cm</td>
-                </tr>
-                <tr>
-                  <td>Medida da Ponte do Nariz</td>
-                  <td>1 mm</td>
-                </tr>
-                <tr>
-                  <td>Garantia</td>
-                  <td>3 meses</td>
-                </tr>
-                <tr>
-                  <td>Lente</td>
-                  <td>Proteção UV</td>
-                </tr>
-              </tbody>
-            </table>
-          </Characteristics>
+          <ProductCharacteristics details={product.details} />
         </ProductInformation>
       </Container>
       <Information />
