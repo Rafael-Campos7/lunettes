@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Container, Color } from './styles/style'
 
 type Color = {
@@ -14,7 +14,9 @@ interface ColorSelectorProps {
 export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
   const [colorSelected, setColorSelected] = useState(colors[0].name)
 
-  onColorChange(colorSelected)
+  useEffect(() => {
+    onColorChange(colorSelected)
+  }, [colorSelected])
 
   return (
     <Container>

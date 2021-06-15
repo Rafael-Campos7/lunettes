@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from './styles'
 
 interface AmountSelectorProps {
@@ -8,7 +8,9 @@ interface AmountSelectorProps {
 export function AmountSelector({ onChangeAmount }: AmountSelectorProps) {
   const [amount, setAmount] = useState(1)
 
-  onChangeAmount(amount)
+  useEffect(() => {
+    onChangeAmount(amount)
+  }, [amount])
 
   return (
     <Container>
