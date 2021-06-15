@@ -4,6 +4,7 @@ import { ProductGallery } from '../ProductGallery'
 import { BreadCrumb } from '../BreadCrumb'
 import { AmountSelector } from '../AmountSelector'
 import { getBreadCrumbTrail } from './helpers/getBreadCrumbTrail'
+import { formatPrice } from './helpers/formatPrice'
 import { ImWhatsapp } from 'react-icons/im'
 import { FiHeart } from 'react-icons/fi'
 import { Container, DiscountStamp, Gallery, Product, Label, Price } from './styles'
@@ -51,12 +52,17 @@ type Product = {
   colors: Color[];
 }
 
+type Prices = {
+  price: string;
+  discountedPrice: string;
+}
+
 interface ProductDetailsProps {
   product: Product,
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
-  const [price, setPrice] = useState(product.formattedPrice)
+  const [prices, setPrices] = useState<Prices>(formatPrice(1, product.price, product.discount))
   const [colorIndex, setColorIndex] = useState(1)
   
   const handleColorChange = useCallback((colorName) => {
@@ -65,12 +71,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   }, [product])
 
   const handleUpdatePrice = useCallback((amount: number) => {
-    const newPrice = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(product.price * amount)
-
-    setPrice(newPrice)
+    setPrices(formatPrice(amount, product.price, product.discount))
   }, [product])
 
   return (
@@ -89,8 +90,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         <div className="price" >
           <Label>Preço:</Label>
           <Price discount={product.discount > 0}>
-            <h3 className="priceWithoutDiscount">{product.formattedPrice}</h3>
-            {(product.discount > 0) && <h3 className="priceWithDiscount" >{ product.discountedPrice }</h3>}
+            <h3 className="priceWithoutDiscount">{prices.price}</h3>
+            {(product.discount > 0) && <h3 className="priceWithDiscount" >{ prices.discountedPrice }</h3>}
           </Price>
         </div>
         <div className="amount" >
