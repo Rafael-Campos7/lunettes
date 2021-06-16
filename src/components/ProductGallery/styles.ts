@@ -47,9 +47,6 @@ export const ImageContainer = styled.div<ImageContainerProps>`
     height: 100%;
   }
 
-  @media screen and (max-width: 1300px) {
-    height: 320px;
-  }
 `
 
 export const DotsContainer = styled.div<DotsContainerProps>`

@@ -6,10 +6,25 @@ interface PriceProps {
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 480px 1fr;
+  grid-template-columns: 450px 1fr;
   grid-template-rows: 1fr;
   gap: 55px;
+  padding: 0px 20px;
   width: 1260px;
+
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 1060px) {
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+  }
+
+  @media screen and (max-width: 950px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 export const DiscountStamp = styled.h4`
   position: absolute;
@@ -36,8 +51,8 @@ export const DiscountStamp = styled.h4`
 
 export const Gallery = styled.div`
   position: relative;
-  width: 480px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
 `
 export const Label = styled.h4`
   font-size: 12px;
@@ -50,6 +65,10 @@ export const Product = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  @media screen and (min-width: 950px) {
+    margin-bottom: 55px;
+  }
 
   & .code {
     display: block;
@@ -76,6 +95,14 @@ export const Product = styled.div`
 
   & .buttons {
     display: flex;
+
+    @media screen and (max-width: 950px) {
+      flex-direction: column;
+      
+      & button:last-child {
+        margin: 20px 0px 0px 0px;
+      }
+    }
 
     button {
       display: flex;
