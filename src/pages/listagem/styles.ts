@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-
+  & div:first-child {
+    align-items: center;
+  }
 `
 export const ContentContainer = styled.div`
   display: flex;

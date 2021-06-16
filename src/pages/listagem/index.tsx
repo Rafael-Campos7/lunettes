@@ -61,7 +61,7 @@ export default function Listing({ products }: ListingProps) {
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
 
-      <Background />
+      <Background height="200px" />
       <Container>
         <BreadCrumb title="Oval" trail={["Home", "Grau"]} />
         <Filter products={products} handleSelectedFilters={handleSelectedFilters} />
