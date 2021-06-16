@@ -9,6 +9,7 @@ export default createGlobalStyle`
   @font-face {
     font-family: "Monument";
     src: url('/assets/fonts/MonumentBold.otf');
+    font-display: block;
   }
 
   * {

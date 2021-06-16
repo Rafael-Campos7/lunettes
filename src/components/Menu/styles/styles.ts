@@ -204,6 +204,10 @@ export const Content = styled.div`
       a {
         font-size: 24px;
       }
+
+      button {
+        font-size: 24px;
+      }
     }
 
     & .glassesContainer {
