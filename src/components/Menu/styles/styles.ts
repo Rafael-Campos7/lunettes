@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components'
-import { logoAnimation, glassIconAnimation, glassInAnimation, iconIn, iconOut, slideInTop, textAnimation } from './animations'
+import { logoAnimation, iconIn, iconOut, slideInTop } from './animations'
 
-interface ContentProps {
+interface ContentContainerProps {
+  isMenuOpen: boolean;
+}
+
+interface HeaderProps {
   smallMenu: boolean;
   openMenu: boolean;
 }
@@ -10,8 +14,9 @@ interface ContainerProps {
   openMenu: boolean;
 }
 
-interface GlassLinkProps {
-  delay: number;
+interface BagIconContainerProps {
+  bagLength: number;
+  openMenu: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -45,7 +50,7 @@ export const Container = styled.div<ContainerProps>`
   }
 `
 
-export const Header = styled.div<ContentProps>`
+export const Header = styled.div<HeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,11 +87,11 @@ export const Header = styled.div<ContentProps>`
     position: absolute;
     top: 0px;
     left: 0px;
-    ${props => !props.openMenu 
+    ${props => props.openMenu 
       ? css`
-        animation: ${iconOut} 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-    ` : css`
         animation: ${iconIn} 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
+    ` : css`
+        animation: ${iconOut} 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     `}
   }
 
@@ -117,15 +122,14 @@ export const Header = styled.div<ContentProps>`
       width: 25px;
     }
   }
-
 `
 
-export const Content = styled.div`
-  display: flex;
+export const ContentContainer = styled.div<ContentContainerProps>`
+  display: ${({ isMenuOpen }) => isMenuOpen ? "flex": "none"};
   flex-flow: column nowrap;
   width: 99%;
-  padding: 0px 30px 20vh;
-  overflow-y: scroll;
+  padding: 0px 30px 28vh;
+  overflow-y: auto;
   height: 100vh;
 
   &::-webkit-scrollbar {
@@ -139,144 +143,25 @@ export const Content = styled.div`
   &::-webkit-scrollbar-track {
     background: #222222;
   }
-
-  & .buttonContainer {
-    margin-bottom: 50px;
-    animation: ${textAnimation} 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.3s both;
-
-    button {
-      font-size: 32px;
-      text-transform: uppercase;
-      font-family: "Monument";
-      color: #ffffff;
-      background: none;
-      border: none;
-      cursor: pointer;  
-      
-
-      &:hover {
-        opacity: 0.5;
-      }
-    }  
-   
-  }
-
-  & .glassesContainer {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-bottom: 50px;
-
-    h2 {
-      font-family: "Monument";
-      font-size: 32px;
-      color: #ffffff;
-      text-transform: uppercase;
-      animation: ${textAnimation} 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.3s both;
-
-      a:hover {
-        opacity: 0.5;
-      }
-    }
-
-    nav {
-      width: 100%;
-    }
-
-    ul {
-      display: flex;
-      justify-content: space-space-around;
-      flex-wrap: wrap;
-      width: 80%;
-    }  
-
-    img {
-      max-width: 150px;
-      height: 60px;
-    }
-  }
-
-  @media screen and (max-width: 720px) {
-    padding: 0px 15px 20vh;
-    margin-bottom: 30px;
-
-    & .buttonContainer {
-      a {
-        font-size: 24px;
-      }
-
-      button {
-        font-size: 24px;
-      }
-    }
-
-    & .glassesContainer {
-      h2 {
-        font-size: 24px;
-      }
-      
-      ul {
-        width: 100%;
-      }
-
-      img {
-        max-width: 100px;
-        height: 40px;
-      }
-    }
-  }
 `
 
-export const GlassLink = styled.li<GlassLinkProps>`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  flex-basis: 20%;
-  margin: 30px 20px 0px 0px;
-  cursor: pointer;
-  animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
-  -webkit-animation: ${glassInAnimation} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.${props => props.delay}s both;
-
-  &:hover img {
-    -webkit-animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};
-    animation: 0.9s ease 0s 1 normal both running ${glassIconAnimation};
-  }
-
-  &:hover span {
-    color: #000000;
-          
+export const BagIconContainer = styled.div<BagIconContainerProps>`
+  ${({ bagLength, openMenu}) => bagLength > 0 && !openMenu && css`
     &::before {
-      width: 100%;
-    }
-  }
-
-  span {
-    display: block;
-    width: 150px;
-    margin-top: 20px;
-    color: var(--gray-200);
-    font-size: 14px;
-    text-align: center;
-    position: relative;
-    z-index: 5;
-
-    &::before {
+      content: "${bagLength}";
       position: absolute;
-      content: "";
-      top: 0px;
-      left: 0px;
+      top: 22px;
+      left: -4px;
+      font-size: 10px;
+      font-weight: bold;
+      width: 5px;
+      height: 5px;
+      padding: 5px;
+      margin: 0px auto;
+      line-height: 5px; 
+      border-radius: 50%;
       background: #ffffff;
-      width: 0%;
-      height: 20px;
-      transition: all 0.2s linear 0s;
-      z-index: -1;
-    }  
-  }
-
-  @media screen and (max-width: 720px) {
-    span {
-      width: 100px;
-    }
-  }
+      z-index: 100;
+    } 
+  `}
 `

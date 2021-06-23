@@ -1,25 +1,38 @@
-import { useEffect, useState } from "react";
-import { Container, GlassLink, Header, Content } from "./styles/styles";
-
-import { eyeGlasses, sunGlasses } from './glasses'
+import { useEffect, useCallback, useState } from "react";
+import { useBag } from "../../hooks/useBag";
+import { CarryBag } from '../CarryBag'
+import { NavigationList } from "./NavigationList";
+import { Container, Header, ContentContainer, BagIconContainer } from "./styles/styles";
 
 interface MenuProps {
   toggleTheme(): void;
 }
 
 export function Menu({ toggleTheme }: MenuProps) {
+  const { bag } = useBag()
+  const [menuContent, setMenuContent] = useState("")
   const [openMenu, setOpenMenu] = useState(false)
   const [smallMenu, setSmallMenu] = useState(false)
 
-  function handleMenu() {
-    if (openMenu) {
-      setOpenMenu(false)
-      toggleTheme()
-    } else {
-      setOpenMenu(true)
-      toggleTheme()
+  const handleMenu = useCallback((content: string) => {
+    switch (content) {
+      case "bag":  
+        if (bag.length === 0) { 
+          setOpenMenu(false)
+          openMenu && toggleTheme()
+          break;
+        } 
+        setMenuContent(content)
+        openMenu ? setOpenMenu(false) : setOpenMenu(true)
+        toggleTheme()    
+      break;
+      case "navigation":  
+        setMenuContent(content)
+        openMenu ? setOpenMenu(false) : setOpenMenu(true)
+        toggleTheme()
+      break;
     }
-  }
+  }, [bag, openMenu])
 
   function handleScrollMove() {
     const offSet = window.pageYOffset
@@ -39,56 +52,28 @@ export function Menu({ toggleTheme }: MenuProps) {
     }
   }, [])
 
+  useEffect(() => {
+    handleMenu("bag")
+  }, [bag.length])
+
   return (
     <Container openMenu={openMenu} >
       <Header smallMenu={smallMenu} openMenu={openMenu} >
-        <button type="button" onClick={handleMenu} >
-          <img className="closeIcon" src="./assets/images/close.svg" alt="Ícone fechar menu" />
+        <button type="button" onClick={() => {handleMenu("navigation")}} >
+          {menuContent === "navigation" && <img className="closeIcon" src="./assets/images/close.svg" alt="Ícone fechar menu" />}
           <img className="hamburgerIcon" src="./assets/images/menu-icon.svg" alt="Ícone abrir menu" />
         </button>
         <img className="logo-lunettes" src={`./assets/images/${smallMenu ? 'logotipo-negativo.png' : 'logo-lunettes.svg'}`} alt="Logo Lunettes" />
-        <button type="button">
-          <img className="bagIcon" src="./assets/images/bag.svg" alt="Ícone da sacola" />
+        <button type="button" onClick={() => {handleMenu("bag")}}>
+          {menuContent === "bag" && <img className="closeIcon" src="./assets/images/close.svg" alt="Ícone fechar menu" />}
+          <BagIconContainer bagLength={bag.length} openMenu={openMenu} >
+            <img src="./assets/images/bag.svg" alt="Ícone da sacola" className="bagIcon"/>  
+          </BagIconContainer>   
         </button>
       </Header>
-
-      {openMenu &&
-        <Content>
-          <div className="buttonContainer">
-            <button type="button" onClick={handleMenu} >Home</button>
-          </div>
-          <div className="glassesContainer" >
-            <h2><a href="/">Óculos de Grau</a></h2>
-            <nav>
-              <ul>
-                {eyeGlasses.map(glass => {
-                  return (
-                    <GlassLink key={glass.id} delay={glass.id}>
-                      <img src={glass.image_path} />
-                      <span>{glass.title}</span>
-                    </GlassLink>
-                  )
-                })}
-              </ul>
-            </nav>
-          </div>
-          <div className="glassesContainer" >
-            <h2><a href="/">Óculos Solar</a></h2>
-            <nav>
-              <ul>
-              {sunGlasses.map(glass => {
-                  return (
-                    <GlassLink key={glass.id} delay={glass.id}>
-                      <img src={glass.image_path} />
-                      <span>{glass.title}</span>
-                    </GlassLink>
-                  )
-                })}
-              </ul>
-            </nav>
-          </div>
-        </Content>
-      }
+      <ContentContainer isMenuOpen={openMenu} >
+        {openMenu && (menuContent === "navigation" ? <NavigationList /> : <CarryBag handleCloseMenu={handleMenu} />)}
+      </ContentContainer>
     </Container>
   )
 }
