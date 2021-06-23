@@ -36,6 +36,7 @@ type Details = {
 }
 
 type Product = {
+  id: string;
   code: string;
   name: string;
   price: number;
@@ -78,6 +79,7 @@ export default function Details({ product }: DetailsProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const product = {
+    id: data._id,
     code: data.code,
     name: data.productName,
     price: data.price,

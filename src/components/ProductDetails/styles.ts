@@ -112,7 +112,6 @@ export const Product = styled.div`
       border-radius: 8px;
       box-shadow: 1px 2px 8px rgba(0,0,0,0.5);
       padding: 10px 25px;
-      width: 250px;
       height: 50px;
       color: #ffffff;
       font-size: 20px;
@@ -123,19 +122,12 @@ export const Product = styled.div`
         margin-right: 10px;
       }
     }
-
-    & .putInTheBag {
-      background: #000000;
-
-      &:hover {
-        opacity: 0.5;
-      }
-    }
     
     & .buyNow {
       background: #25D366; 
       margin-left: 15px;
-      
+      width: 250px;
+
       &:hover {
         background: var(--gray-200);
       }
