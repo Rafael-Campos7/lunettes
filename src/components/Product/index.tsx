@@ -1,6 +1,6 @@
-import { FiHeart } from "react-icons/fi";
+import { ProductButton } from "../ProductButton";
 import { ProductGallery } from "../ProductGallery";
-import { Container, Name, Id, Price, Details, DiscountStamp } from './styles'
+import { Container, Name, Id, Price, DiscountStamp } from './styles'
 
 type Image = {
   id: string;
@@ -49,10 +49,9 @@ export function Product({ product }: ProductProps) {
         <h3 className="priceWithoutDiscount">{product.formattedPrice}</h3>
         {(product.discount > 0) && <h3 className="priceWithDiscount" >{ product.discountedPrice }</h3>}
       </Price>
-      <Details>
-        <FiHeart />
-        <span>Ver mais</span>
-      </Details>
+      <ProductButton action={() => {}} productId={product.id}>
+        Ver mais
+      </ProductButton>
     </Container>
   )
 }
