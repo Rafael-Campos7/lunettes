@@ -27,7 +27,7 @@ export function CarryBag({ handleCloseMenu }: CarryBagProps) {
         <h3>Preço</h3>
       </BagHeader>
       <div>
-        {bag.map((product, index) => <Product product={product} animationDelay={index} />)}
+        {bag.map((product, index) => <Product key={product.id} product={product} animationDelay={index} />)}
       </div>
       <Total>
         <span>Total</span>
