@@ -13,6 +13,7 @@ export const Container = styled.div`
     color: #ffffff;
 
     @media screen and (max-width: 720px) {
+      margin-bottom: 0px;
       font-size: 24px;
     }
   }
@@ -21,7 +22,7 @@ export const Container = styled.div`
 export const BagHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px;
+  grid-template-rows: 80px;
   align-items: center;
   width: 90%;
   border-bottom: 1px solid var(--gray-200);
@@ -33,11 +34,19 @@ export const BagHeader = styled.div`
     text-transform: uppercase;
   }
 
-  @media screen and (max-width: 720px) {
-    grid-template-rows: 50px;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
 
     h3 {
       font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    grid-template-columns: 4fr 1fr;
+
+    & h3:nth-child(2) {
+      display: none;
     }
   }
 `
@@ -49,13 +58,18 @@ export const Total = styled.div`
   align-items: center;
   width: 90%;
   border-top: 1px solid var(--gray-200);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
 
-  strong {
-    display: block;
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 720px) {
+    grid-template-columns: 4fr 1fr;
   }
 `
 
@@ -66,6 +80,7 @@ export const Buttons = styled.div`
 
   button {
     display: flex;
+    justify-content: center;
     align-items: center;
     width: 300px;
     height: 60px;
@@ -85,6 +100,12 @@ export const Buttons = styled.div`
       -webkit-animation: ${buttonIconMove} 0.8s both;
 	    animation: ${buttonIconMove} 0.8s both;
     }
+
+    @media screen and (max-width: 720px) {
+      width: 270px;
+      height: 50px;
+      font-size: 14px;
+    }
   }
 
   & .continueButton {
@@ -102,6 +123,23 @@ export const Buttons = styled.div`
 
     &:hover {
       background: #00ba44;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+    align-items: center;
+    
+    button {
+      padding: 10px 15px;
+    }
+
+    & .continueButton {
+      margin: 0px 0px 10px 0px;
     }
   }
 `

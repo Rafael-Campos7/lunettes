@@ -143,6 +143,10 @@ export const ContentContainer = styled.div<ContentContainerProps>`
   &::-webkit-scrollbar-track {
     background: #222222;
   }
+
+  @media screen and (max-width: 720px) {
+    padding: 0px 10px 28vh;
+  }
 `
 
 export const BagIconContainer = styled.div<BagIconContainerProps>`

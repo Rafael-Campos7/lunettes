@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { useBag } from '../../../hooks/useBag'
 import { AmountSelector } from '../../AmountSelector'
 import { BsTrash } from 'react-icons/bs'
-import { Container, ProductContainer, Price, ColorBox } from './styles'
+import { Container, ProductContainer, AmountContainer, Price, ColorBox } from './styles'
 import { formatPrices } from '../../../util/formatPrices'
 
 type Prices = {
@@ -57,7 +57,15 @@ export function Product({ product, animationDelay }: ProductProps) {
           </div>
         </div>
       </ProductContainer>
-      <AmountSelector initialValue={product.amount} onChangeAmount={handleAmountChange} color="#ffffff" />
+      <AmountContainer>
+        <AmountSelector 
+          initialValue={product.amount} 
+          onChangeAmount={handleAmountChange} 
+          color="#ffffff" 
+        />
+        <button onClick={handleRemoveProduct} >Remover</button>
+      </AmountContainer>
+      
       <Price>
         <div>
           {product.discount > 0 && <span>{prices.price}</span>}

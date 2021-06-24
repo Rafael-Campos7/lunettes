@@ -95,6 +95,7 @@ export const Product = styled.div`
 
   & .buttons {
     display: flex;
+    width: max-content;
 
     @media screen and (max-width: 950px) {
       flex-direction: column;
