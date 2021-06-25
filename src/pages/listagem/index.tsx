@@ -6,16 +6,8 @@ import { data } from './data'
 import { Background } from '../../components/Background'
 import { Product } from '../../components/Product'
 import { Filter } from '../../components/Filter';
-import { Container, Content, ContentContainer } from "./styles";
 import { BreadCrumb } from '../../components/BreadCrumb';
-
-type Filter = {
-  type: string;
-  value: string;
-  active: boolean;
-  background?: string;
-  price?: number;
-}
+import { Container, Content, ContentContainer } from "./styles";
 
 type Image = {
   id: string;

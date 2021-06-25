@@ -4,8 +4,10 @@ import { Information } from '../../components/Information'
 import { Background } from '../../components/Background/'
 import { ProductDetails } from '../../components/ProductDetails'
 import { ProductCharacteristics } from '../../components/ProductCharacteristics'
+import { ListProducts } from '../../components/ListProducts'
 import { Container, ProductInformation, Description } from './styles'
 import { data } from './data'
+
 
 type Color = {
   name: string;
@@ -35,6 +37,11 @@ type Details = {
   warranty: string;
 }
 
+type Associated = {
+  id: string;
+  url: string;
+}
+
 type Product = {
   id: string;
   code: string;
@@ -43,6 +50,7 @@ type Product = {
   formattedPrice: string;
   discountedPrice: string;
   category: string;
+  associated: Associated[];
   styles: string[];
   description: string;
   details: Details,
@@ -73,6 +81,7 @@ export default function Details({ product }: DetailsProps) {
         </ProductInformation>
       </Container>
       <Information />
+      <ListProducts products={[product, product, product]} title="Produtos Relacionados" />
     </>
   )
 }
@@ -92,6 +101,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       currency: 'BRL',
     }).format(data.price - ((data.discount / 100) * data.price)),
     category: data.category,
+    associated: data.associated,
     styles: data.subcategories,
     description: data.description,
     details: data.details,
