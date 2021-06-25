@@ -86,31 +86,3 @@ export const Price = styled.div<PriceProps>`
     color: #EF1F5F;
   }
 `
-
-export const Details = styled.button`
-  padding: 10px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000000;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0px 2px 2px #000000;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.6;
-  }
-
-  span {  
-    margin-left: 10px;
-    font-size: 20px;
-    color: #ffffff;
-  }
-
-  svg {
-    color: #ffffff;
-    width: 30px;
-    height: 30px;
-  }
-`

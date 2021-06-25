@@ -7,12 +7,12 @@ type Color = {
 }
 
 interface ColorSelectorProps {
-  onColorChange: (colorName: string) => void;
+  onColorChange: (color: Color) => void;
   colors: Color[];
 }
 
 export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
-  const [colorSelected, setColorSelected] = useState(colors[0].name)
+  const [colorSelected, setColorSelected] = useState(colors[0])
 
   useEffect(() => {
     onColorChange(colorSelected)
@@ -24,9 +24,9 @@ export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
         return (
           <Color 
             key={color.name}
-            onClick={() => { setColorSelected(color.name) }}
+            onClick={() => { setColorSelected(color) }}
             background={color.background} 
-            active={color.name === colorSelected} 
+            active={color.name === colorSelected.name} 
           >
             {color.name}
           </Color>

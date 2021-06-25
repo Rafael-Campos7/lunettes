@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { AppProps } from 'next/app'
+import { BagProvider } from '../hooks/useBag'
 import { ThemeProvider, } from 'styled-components'
 import menuClosed from '../styles/themes/menuClosed'
 import menuOpen from '../styles/themes/menuOpen'
@@ -16,17 +17,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <header>
-        <Menu toggleTheme={changeTheme} />
-      </header>
-      <main>
-        <Component {...pageProps} />
-        <Gallery />
-      </main>
-      <Footer />
-    </ThemeProvider>
+    <BagProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <header>
+          <Menu toggleTheme={changeTheme} />
+        </header>
+        <main>
+          <Component {...pageProps} />
+          <Gallery />
+        </main>
+        <Footer />
+      </ThemeProvider>
+    </BagProvider>
   )
 }
 

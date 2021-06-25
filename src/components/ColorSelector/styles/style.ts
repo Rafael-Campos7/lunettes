@@ -8,9 +8,19 @@ interface ColorProps {
 
 export const Container = styled.div`
   display: flex;
-  
+
   & button:not(:first-child) {
     margin-left: 15px;
+  }
+
+  @media screen and (max-width: 480px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    & button:not(:first-child) {
+    margin-left: 0px;
+  }
   }
 `
 

@@ -8,19 +8,33 @@ export const Container = styled.div`
   }
 
   table {
+    border-spacing: 0;
+    width: 100%;
+
     tr {
-      display: block;
+      display: flex;
       margin-bottom: 20px;
+      font-size: 16px;
 
       & td:nth-child(1) {
-        font-size: 16px;
         font-weight: bold;
-        width: 350px;
+        width: 50%;
       }
 
       & td:nth-child(2) {
-        font-size: 16px;
         color: var(--gray-200);
+      }
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    h3 {
+      font-size: 18px;
+    }
+
+    table {
+      tr {  
+        font-size: 14px;
       }
     }
   }

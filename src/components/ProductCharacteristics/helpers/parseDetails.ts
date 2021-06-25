@@ -1,18 +1,10 @@
 type Details = {
-  accessories?: string;
-  bridge?: string;
-  front?: string;
-  hast?: string;
-  height?: string;
-  lens?: string;
-  material?: string;
-  size?: string;
-  warranty?: string;
+  [key:string]: string;
 }
 
 export function parseDetails(details: Details) {
   let detailsParsed = []
-  const properties = {
+  const properties: Details = {
     accessories: "Acessórios",
     bridge: "Medida da Ponte do Nariz",
     front: "Medida da Frente",
