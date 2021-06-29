@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
           crossOrigin=""
           as="font"
         />
-        <link rel="shortcut icon" href="assets/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/assets/favicon.png" type="image/png" />
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
       <body>

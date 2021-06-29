@@ -1,21 +1,20 @@
+type Style = {
+  name: string;
+}
+
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 type Product = {
   id: string;
   name: string;
-  styles: string[];
+  styles: Style[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
@@ -36,15 +35,15 @@ type Filter = {
 export function loadColors(products: Product[]) {
   const productsColors = products.reduce((colors: Filter[], { images }) => {
     images.forEach((image) => {
-      const alreadyExists = colors.find(color => color.value === image.color.name)
-      if (alreadyExists || image.color.name == 'NOTCOLOR' ) {
+      const alreadyExists = colors.find(color => color.value === image.color_name)
+      if (alreadyExists || image.color_name == 'NOTCOLOR' ) {
         return;
       }
 
       const color = {
         type: "color",
-        value: image.color.name,
-        background: image.color.background,
+        value: image.color_name,
+        background: image.background,
         active: false,
       }
 
@@ -60,14 +59,14 @@ export function loadColors(products: Product[]) {
 export function loadModels(products: Product[]) {
   const productsModels = products.reduce((models: Filter[], { styles }) => {
     styles.forEach((style) => {
-      const alreadyExists = models.find(model => style === model.value)
+      const alreadyExists = models.find(model => style.name === model.value)
       if (alreadyExists ) {
         return;
       }
 
       const model = {
         type: "model",
-        value: style,
+        value: style.name,
         active: false,
       }
 

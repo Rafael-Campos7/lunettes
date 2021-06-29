@@ -6,7 +6,7 @@ interface DotsContainerProps {
 
 interface DotButtonProps {
   productColor: {
-    name: string;
+    colorName: string;
     background: string;
   };
 }
@@ -91,7 +91,7 @@ export const Dot = styled.div`
 `
 
 export const ColorDot = styled.div<DotButtonProps>`
-  display: ${props => props.productColor.name === "NOTCOLOR" ? "none" : "block"};
+  display: ${props => props.productColor.colorName === "NOTCOLOR" ? "none" : "block"};
   background: ${props => props.productColor.background.length > 7 
     ? `url(${props.productColor.background}) center center / cover`
     : props.productColor.background
@@ -103,7 +103,7 @@ export const ColorDot = styled.div<DotButtonProps>`
 
   &:hover {
     ::before {
-      content: "${props => props.productColor.name}";
+      content: "${props => props.productColor.colorName}";
       position: absolute;
       top: 30px;
       left: -45px;

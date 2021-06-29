@@ -8,35 +8,35 @@ import { SliderContainer, NextArrow, PrevArrow} from './styles'
 export function Carousel() {
   const images = [
     {
-      path:"./assets/images/slider-images/boy.png",
+      path:"/assets/images/slider-images/boy.png",
       alt:"Jovem de óculos"
     },
     {
-      path:"./assets/images/slider-images/dog.png",
+      path:"/assets/images/slider-images/dog.png",
       alt:"Cachorro de óculos"
     },
     {
-      path:"./assets/images/slider-images/girls.png",
+      path:"/assets/images/slider-images/girls.png",
       alt:"Três mulheres"
     },
     {
-      path:"./assets/images/slider-images/man.png",
+      path:"/assets/images/slider-images/man.png",
       alt:"Homem com óculos"
     },
     {
-      path:"./assets/images/slider-images/boy.png",
+      path:"/assets/images/slider-images/boy.png",
       alt:"Jovem de óculos"
     },
     {
-      path:"./assets/images/slider-images/dog.png",
+      path:"/assets/images/slider-images/dog.png",
       alt:"Cachorro de óculos"
     },
     {
-      path:"./assets/images/slider-images/girls.png",
+      path:"/assets/images/slider-images/girls.png",
       alt:"Três mulheres"
     },
     {
-      path:"./assets/images/slider-images/man.png",
+      path:"/assets/images/slider-images/man.png",
       alt:"Homem com óculos"
     },
   ]

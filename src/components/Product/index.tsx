@@ -1,32 +1,28 @@
+import { useRouter } from 'next/router'
 import { ProductButton } from "../ProductButton";
 import { ProductGallery } from "../ProductGallery";
 import { Container, Name, Id, Price, DiscountStamp } from './styles'
 
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 type Product = {
   id: string;
+  slug: string;
   name: string;
-  styles: string[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
   images: Image[];
   code: string;
   isNewCollection: boolean;
-  discount: number;
+  discount: number; 
 }
 
 interface ProductProps {
@@ -34,6 +30,7 @@ interface ProductProps {
 }
 
 export function Product({ product }: ProductProps) {
+  const router = useRouter()
   return (
     <Container>
       {product.discount > 0 && <DiscountStamp>{product.discount}% <span>OFF</span></DiscountStamp>}
@@ -49,7 +46,7 @@ export function Product({ product }: ProductProps) {
         <h3 className="priceWithoutDiscount">{product.formattedPrice}</h3>
         {(product.discount > 0) && <h3 className="priceWithDiscount" >{ product.discountedPrice }</h3>}
       </Price>
-      <ProductButton action={() => {}} productId={product.id}>
+      <ProductButton action={() => {router.push(`/detalhes/${product.slug}`)}} productId={product.id}>
         Ver mais
       </ProductButton>
     </Container>

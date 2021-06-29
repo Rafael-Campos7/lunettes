@@ -133,7 +133,10 @@ export const AmountContainer = styled.div`
 export const ColorBox = styled.div<ColorBoxProps>`
   width: 25px;
   height: 25px;
-  background: ${({ background }) => background};
+  background: ${({ background }) => (background.length > 7)
+    ? `url(${background}) center center / cover`
+    : background
+   };
   border: 1px solid var(--gray-200);
   border-radius: 4px;
   margin-right: 10px;

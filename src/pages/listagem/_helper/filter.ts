@@ -1,21 +1,21 @@
+type Style = {
+  name: string;
+}
+
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 type Product = {
   id: string;
+  slug: string;
   name: string;
-  styles: string[];
+  styles: Style[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
@@ -39,14 +39,14 @@ export function filter(selectedFilters: Filter[], products: Product[]) {
       switch (filter.type) {
         case "color":
           product.images.forEach((image) => {
-           if (image.color.name === filter.value) {
+           if (image.color_name === filter.value) {
             acc.productHasColorOrModel = true
            }
           }) 
           break;
         case "model":
           product.styles.forEach((style) => {
-            if (style === filter.value ) {
+            if (style.name === filter.value ) {
               acc.productHasColorOrModel = true
             }
           }) 

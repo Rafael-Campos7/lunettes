@@ -1,32 +1,33 @@
-import { useCallback, useState } from 'react';
-import { filter } from './_helper/filter'
-import Head from 'next/head'
+import Head from 'next/head';
+import { useCallback, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import { data } from './data'
-import { Background } from '../../components/Background'
-import { Product } from '../../components/Product'
+import Prismic from '@prismicio/client';
+import { getPrismicClient } from '../../services/prismic';
+import { filter } from './_helper/filter';
+import { Background } from '../../components/Background';
+import { Product } from '../../components/Product';
 import { Filter } from '../../components/Filter';
 import { BreadCrumb } from '../../components/BreadCrumb';
 import { Container, Content, ContentContainer } from "./styles";
 
+type Style = {
+  name: string;
+}
+
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 type Product = {
   id: string;
+  slug: string;
   name: string;
-  styles: string[];
+  styles: Style[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
@@ -38,13 +39,18 @@ type Product = {
 
 interface ListingProps {
   products: Product[];
+  slug: string[];
 }
 
-export default function Listing({ products }: ListingProps) {
-  const [listedProducts, setListedProducts] = useState<Product[]>(products)
+export default function Listing({ products, slug }: ListingProps) {
+  const [listedProducts, setListedProducts] = useState<Product[]>([])
 
   const handleSelectedFilters = useCallback((selectedFilters) => {
     setListedProducts(filter(selectedFilters, products))
+  }, [products])
+
+  useEffect(() => {
+    setListedProducts(products)
   }, [products])
 
   return (
@@ -52,10 +58,9 @@ export default function Listing({ products }: ListingProps) {
       <Head>
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
-
       <Background height="200px" />
       <Container>
-        <BreadCrumb title="Oval" trail={["Home", "Grau"]} />
+        <BreadCrumb title={slug.length > 1 ? slug[1] : slug[0]} trail={["Home", slug[0]]} />
         <Filter products={products} handleSelectedFilters={handleSelectedFilters} />
         <ContentContainer>
           <Content>
@@ -71,31 +76,39 @@ export default function Listing({ products }: ListingProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const products = data.map(product => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+  const prismic = getPrismicClient(req)
+
+  const response = await prismic.query(
+    Prismic.Predicates.at("document.tags", params.slug)
+  )
+    
+  const products = response.results.map(({id, uid, data}) => {
     return {
-      id: product._id,
-      name: product.productName,
-      styles: product.subcategories,
-      price: product.price,
+      id: id,
+      slug: uid,
+      name: data.product_name,
+      price: data.price,
+      discount: data.discount,
       formattedPrice: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
-      }).format(product.price),
+      }).format(data.price),
       discountedPrice: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
-      }).format(product.price - ((product.discount / 100) * product.price)),
-      images: product.images,
-      code: product.code,
-      isNewCollection: product.isNewCollection,
-      discount: product.discount, 
+      }).format(data.price - ((data.discount / 100) * data.price)),
+      images: data.images,
+      styles: data.styles,
+      isNewCollection: data.is_new_collection,
+      code: data.code,
     }
   })
   
   return {
     props: {  
       products,
+      slug: params.slug,
     },
   }
 }

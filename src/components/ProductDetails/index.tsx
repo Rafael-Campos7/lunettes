@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { useBag } from '../../hooks/useBag'
+import { ImWhatsapp } from 'react-icons/im'
 import { ColorSelector } from '../ColorSelector'
 import { ProductGallery } from '../ProductGallery'
 import { BreadCrumb } from '../BreadCrumb'
@@ -8,7 +9,6 @@ import { ProductButton } from '../ProductButton'
 import { getBreadCrumbTrail } from './helpers/getBreadCrumbTrail'
 import { findProduct } from '../../util/findProduct'
 import { formatPrices } from '../../util/formatPrices'
-import { ImWhatsapp } from 'react-icons/im'
 import { Container, DiscountStamp, Gallery, Product, Label, Price } from './styles'
 
 type Color = {
@@ -16,45 +16,40 @@ type Color = {
   background: string;
 }
 
-type Image = {
-  id: string;
-  url: string;
-  color: Color;
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+type Style = {
+  name: string;
 }
 
-type Details = {
-  accessories: string;
-  bridge: string;
-  front: string;
-  hast: string;
-  height: string;
-  lens: string;
-  material: string;
-  size: string;
-  warranty: string;
+type Image = {
+  id: string;
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
+}
+
+type Detail = {
+  name: string;
+  value: string;
 }
 
 type Product = {
   id: string;
-  code: string;
   name: string;
+  category: string;
+  styles: Style[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
-  category: string;
-  styles: string[];
-  description: string;
-  details: Details,
-  discount: number;
   images: Image[];
+  code: string;
+  description: string,
+  details: Detail[],
+  isNewCollection: boolean;
+  discount: number;
   colors: Color[];
 }
-
 type Prices = {
   price: string;
   discountedPrice: string;
@@ -79,7 +74,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       discount: product.discount,
       code: product.code,
       amount: amountSelectedRef.current.amount,
-      image: product.images[0].allImages.xs,
+      image: product.images[0].xs,
       color: colorSelectedRef.current,
     })
     
@@ -96,7 +91,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   }, [product, bag])
 
   const handleColorChange = useCallback((color) => {
-    const index = product.images.findIndex((image) => image.color.name === color.name)
+    const index = product.images.findIndex((image) => image.color_name === color.name)
     setColorIndex(index)
     colorSelectedRef.current = color
   }, [product])
