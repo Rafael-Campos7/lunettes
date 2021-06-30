@@ -43,6 +43,7 @@ export default class MyDocument extends Document {
           as="font"
         />
         <link rel="shortcut icon" href="/assets/favicon.png" type="image/png" />
+        <meta name="robots" content="noindex"></meta>
         <title>Óculos de Grau e óculos Sol - Lunettes by Lari</title>
       </Head>
       <body>
