@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useBag } from '../../hooks/useBag'
 import { ImWhatsapp } from 'react-icons/im'
 import { ColorSelector } from '../ColorSelector'
@@ -61,7 +61,7 @@ interface ProductDetailsProps {
 
 export function ProductDetails({ product }: ProductDetailsProps) {
   const { bag, addProduct, removeProduct } = useBag()
-  const [prices, setPrices] = useState<Prices>(formatPrices(1, product.price, product.discount))
+  const [prices, setPrices] = useState<Prices>({})
   const [colorIndex, setColorIndex] = useState(1)
   const colorSelectedRef = useRef(product.colors[0])
   const amountSelectedRef = useRef({ amount: 1 })
@@ -100,6 +100,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     setPrices(formatPrices(amount, product.price, product.discount))
     amountSelectedRef.current.amount = amount
   }, [product, amountSelectedRef])
+
+  useEffect(() => {
+    setPrices(formatPrices(amountSelectedRef.current.amount, product.price, product.discount))
+    setColorIndex(1)
+  }, [product])
 
   return (
     <Container>

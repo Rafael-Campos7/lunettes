@@ -12,11 +12,15 @@ interface ColorSelectorProps {
 }
 
 export function ColorSelector({ colors, onColorChange }: ColorSelectorProps) {
-  const [colorSelected, setColorSelected] = useState(colors[0])
+  const [colorSelected, setColorSelected] = useState<Color>([])
 
   useEffect(() => {
     onColorChange(colorSelected)
   }, [colorSelected])
+
+  useEffect(() => {
+    setColorSelected(colors[0])
+  }, [colors])
 
   return (
     <Container>
