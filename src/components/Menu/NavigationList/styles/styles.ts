@@ -31,14 +31,16 @@ export const Container = styled.div`
     flex-direction: column;
     margin-bottom: 50px;
 
-    h2 {
+    button {
+      background: none;
+      border: none;
       font-family: "Monument";
       font-size: 32px;
       color: #ffffff;
       text-transform: uppercase;
       animation: ${textAnimation} 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.3s both;
 
-      a:hover {
+      & :hover {
         opacity: 0.5;
       }
     }
@@ -75,7 +77,7 @@ export const Container = styled.div`
     }
 
     & .glassesContainer {
-      h2 {
+      button {
         font-size: 24px;
       }
       

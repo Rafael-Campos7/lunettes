@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prismicio/client": "^5.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "next": "10.2.2",
     "react": "17.0.2",

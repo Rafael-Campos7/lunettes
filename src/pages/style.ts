@@ -15,6 +15,6 @@ export const BackgroundContainer = styled.div`
     min-width: 100%;
     min-height: 100%;
     z-index: 0;
-    background: url("./assets/images/background-image.jpg") center center / cover;
+    background: url("/assets/images/background-image.jpg") center center / cover;
   }
 `

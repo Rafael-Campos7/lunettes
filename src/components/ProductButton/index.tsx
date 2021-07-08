@@ -14,11 +14,15 @@ interface ProductButtonProps {
 
 export function ProductButton({ children, action, productId }: ProductButtonProps) {
   const { bag } = useBag()
-  const [isProductInTheBag, setIsProductInTheBag] = useState(findProduct(bag, productId))
+  const [isProductInTheBag, setIsProductInTheBag] = useState(false)
   
   useEffect(() => {
     setIsProductInTheBag(findProduct(bag, productId))
   }, [bag])
+
+  useEffect(() => {
+    setIsProductInTheBag(findProduct(bag, productId))
+  }, [productId])
 
   return (
     <Container isProductInTheBag={isProductInTheBag} onClick={action} >

@@ -5,9 +5,10 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px 0px;
+  padding: 50px 0px;
+  background: #ffffff;
 
-  h4 {
+  & > h4 {
     font-family: 'Monument';
     font-size: 42px;
     text-align: center;

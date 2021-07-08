@@ -5,31 +5,30 @@ import { Container, SelectorContainer, FilterBySelector, FilterOption, FiltersEn
 import { loadColors, loadModels, loadPrices } from './helper/loadFilters'
 import { activedFilters } from './helper/activedFilters'
 
+type Style = {
+  name: string;
+}
+
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 type Product = {
   id: string;
   name: string;
-  styles: string[];
+  styles: Style[];
   price: number;
   formattedPrice: string;
   discountedPrice: string;
   images: Image[];
   code: string;
   isNewCollection: boolean;
-  discount: number;
+  discount: number; 
 }
 
 interface FilterProps {
@@ -47,19 +46,19 @@ type Filter = {
 
 export function Filter({ products, handleSelectedFilters }: FilterProps) {
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false)
-  const [colors, setColors] = useState<Filter[]>(loadColors(products))
-  const [models, setModels] = useState<Filter[]>(loadModels(products))
-  const [prices, setPrices] = useState<Filter[]>(loadPrices(products))
+  const [colors, setColors] = useState<Filter[]>([])
+  const [models, setModels] = useState<Filter[]>([])
+  const [prices, setPrices] = useState<Filter[]>([])
   const [selectedFilters, setSelectedFilters] = useState<Filter[]>([])
-  const [filterBy, setFilterBy] = useState<String>("colors")
-  const [filters, setFilters] = useState<Filter[]>(colors)
+  const [filterBy, setFilterBy] = useState<String>("")
+  const [filters, setFilters] = useState<Filter[]>([])
 
   const numberSelectedFilters = selectedFilters.length
 
-  function handleFilterBy(filterBy: string) {
-    setFilterBy(filterBy)
+  function handleFilterBy(filter: string) {
+    setFilterBy(filter)
 
-    switch (filterBy) {
+    switch (filter) {
       case "colors":
         setFilters(colors)
         break;
@@ -83,6 +82,7 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
           return color
         })
         setColors(colorsUpdated)
+        setFilters(colorsUpdated)
         break;
       case "model":
         const modelsUpdated = models.map(model => {
@@ -93,6 +93,7 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
           return model
         })
         setModels(modelsUpdated)
+        setFilters(modelsUpdated)
         break;
       case "price":
         const pricesUpdated = prices.map(price => {
@@ -103,6 +104,7 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
           return price
         })
         setPrices(pricesUpdated)
+        setFilters(pricesUpdated)
         break;
     }
 
@@ -130,6 +132,14 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
 
     setSelectedFilters(activedFilters(colors, models, prices))
   }
+
+  useEffect(() => {
+    setColors(loadColors(products))
+    setModels(loadModels(products))
+    setPrices(loadPrices(products))
+    setFilterBy("colors")
+    setFilters(loadColors(products))
+  }, [products])
 
   useEffect(() => {
     handleSelectedFilters(selectedFilters)
@@ -190,6 +200,5 @@ export function Filter({ products, handleSelectedFilters }: FilterProps) {
         </FiltersEnabled>
       </Container>
     </>
-
   )
 }

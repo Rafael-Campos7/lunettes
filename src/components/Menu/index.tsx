@@ -60,19 +60,19 @@ export function Menu({ toggleTheme }: MenuProps) {
     <Container openMenu={openMenu} >
       <Header smallMenu={smallMenu} openMenu={openMenu} >
         <button type="button" onClick={() => {handleMenu("navigation")}} >
-          {menuContent === "navigation" && <img className="closeIcon" src="./assets/images/close.svg" alt="Ícone fechar menu" />}
-          <img className="hamburgerIcon" src="./assets/images/menu-icon.svg" alt="Ícone abrir menu" />
+          {menuContent === "navigation" && <img className="closeIcon" src="/assets/images/close.svg" alt="Ícone fechar menu" />}
+          <img className="hamburgerIcon" src="/assets/images/menu-icon.svg" alt="Ícone abrir menu" />
         </button>
-        <img className="logo-lunettes" src={`./assets/images/${smallMenu ? 'logotipo-negativo.png' : 'logo-lunettes.svg'}`} alt="Logo Lunettes" />
+        <img className="logo-lunettes" src={`/assets/images/${smallMenu ? 'logotipo-negativo.png' : 'logo-lunettes.svg'}`} alt="Logo Lunettes" />
         <button type="button" onClick={() => {handleMenu("bag")}}>
-          {menuContent === "bag" && <img className="closeIcon" src="./assets/images/close.svg" alt="Ícone fechar menu" />}
+          {menuContent === "bag" && <img className="closeIcon" src="/assets/images/close.svg" alt="Ícone fechar menu" />}
           <BagIconContainer bagLength={bag.length} openMenu={openMenu} >
-            <img src="./assets/images/bag.svg" alt="Ícone da sacola" className="bagIcon"/>  
+            <img src="/assets/images/bag.svg" alt="Ícone da sacola" className="bagIcon"/>  
           </BagIconContainer>   
         </button>
       </Header>
       <ContentContainer isMenuOpen={openMenu} >
-        {openMenu && (menuContent === "navigation" ? <NavigationList /> : <CarryBag handleCloseMenu={handleMenu} />)}
+        {openMenu && (menuContent === "navigation" ? <NavigationList handleCloseMenu={handleMenu} /> : <CarryBag handleCloseMenu={handleMenu} />)}
       </ContentContainer>
     </Container>
   )

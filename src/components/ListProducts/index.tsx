@@ -1,30 +1,38 @@
-import { useState, useEffect } from 'react'
 import { Product } from '../Product'
 import { Container } from './styles'
 
-/*type Product = {
+type Image = {
   id: string;
-  url: string;
-}*/
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
+}
+
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  formattedPrice: string;
+  discountedPrice: string;
+  images: Image[];
+  code: string;
+  isNewCollection: boolean;
+  discount: number; 
+}
 
 interface ListProductsProps {
-  //products: Product[];
+  products: Product[];
   title: string; 
 }
 
 export function ListProducts({ products, title }: ListProductsProps) {
-  const [listedProducts, setListedProducts] = useState(products)
-
-  useEffect(() => {
-    // Carregar os dados dos óculos através dos ids recebidos.
-    // Atualizar o estado  
-  }, []) 
-
   return (
     <Container>
       <h4>{title}</h4>
       <div>
-        {listedProducts.map((product) => {
+        {products.map((product) => {
           return (
             <Product key={product.id} product={product} />
           )

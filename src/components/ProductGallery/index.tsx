@@ -5,16 +5,11 @@ import { SliderContainer, DotsContainer, Dot, ColorDot, ImageContainer } from '.
 
 type Image = {
   id: string;
-  url: string;
-  color: {
-    name: string;
-    background: string;
-  };
-  allImages: {
-    xs: string;
-    md: string;
-    lg: string;
-  };
+  color_name: string;
+  background: string;
+  xs: string;
+  md: string;
+  lg: string;
 }
 
 interface ProductGalleryProps {
@@ -46,7 +41,12 @@ export function ProductGallery({ images, colorDots, selectedIndex }: ProductGall
     ),
     customPaging: (i) => {
       if (colorDots) {
-        return <ColorDot productColor={images[i].color} />
+        return <ColorDot 
+          productColor={{
+            colorName: images[i].color_name,
+            background: images[i].background
+          }} 
+        />
       } else {
         return <Dot />
       }   
@@ -62,9 +62,9 @@ export function ProductGallery({ images, colorDots, selectedIndex }: ProductGall
               <ImageContainer
                 key={image.id}
                 isFirstImage={(index == 0)}
-                imageHover={images[1].allImages.lg}
+                imageHover={images[1].lg}
               >
-                <img src={image.allImages.lg} alt="Óculos Lunettes" />
+                <img src={image.lg} alt="Óculos Lunettes" />
               </ImageContainer>
             )
           })
