@@ -61,7 +61,7 @@ interface ProductDetailsProps {
 
 export function ProductDetails({ product }: ProductDetailsProps) {
   const { bag, addProduct, removeProduct } = useBag()
-  const [prices, setPrices] = useState<Prices>({})
+  const [prices, setPrices] = useState<Prices>(formatPrices(1, product.price, product.discount))
   const [colorIndex, setColorIndex] = useState(1)
   const colorSelectedRef = useRef(product.colors[0])
   const amountSelectedRef = useRef({ amount: 1 })

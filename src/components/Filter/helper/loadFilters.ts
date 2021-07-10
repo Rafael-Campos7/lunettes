@@ -28,7 +28,7 @@ type Filter = {
   type: string;
   value: string;
   active: boolean;
-  background?: string;
+  background: string;
   price?: number;
 }
 
@@ -68,6 +68,7 @@ export function loadModels(products: Product[]) {
         type: "model",
         value: style.name,
         active: false,
+        background: "",
       }
 
       models.push(model)
@@ -90,6 +91,7 @@ export function loadPrices(products: Product[]){
       value: `Até R$ ${price}`,
       price: price, 
       active: false,
+      background: "",
     }
 
     maxPrices.push(maxPrice)

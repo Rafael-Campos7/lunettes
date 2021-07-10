@@ -2,7 +2,7 @@ type Filter = {
   type: string;
   value: string;
   active: boolean;
-  background?: string;
+  background: string;
   price?: number;
 }
 

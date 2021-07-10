@@ -12,6 +12,7 @@ type Image = {
 
 type Product = {
   id: string;
+  slug: string;
   name: string;
   price: number;
   formattedPrice: string;
