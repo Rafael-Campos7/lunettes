@@ -29,8 +29,8 @@ type Filter = {
   type: string;
   value: string;
   active: boolean;
-  background?: string;
-  price?: number;
+  background: string;
+  price: number;
 }
 
 export function filter(selectedFilters: Filter[], products: Product[]) {

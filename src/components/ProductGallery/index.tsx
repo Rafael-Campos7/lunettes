@@ -18,12 +18,12 @@ interface ProductGalleryProps {
   selectedIndex?: number;
 }
 
-export function ProductGallery({ images, colorDots, selectedIndex }: ProductGalleryProps) {
-  const sliderRef = useRef(null)
+export function ProductGallery({ images, colorDots, selectedIndex = 0 }: ProductGalleryProps) {
+  const sliderRef = useRef<Slider>(null)
   
   useEffect(() => {
-    sliderRef.current.slickGoTo(selectedIndex)
-    
+     sliderRef.current?.slickGoTo(selectedIndex)
+
   }, [selectedIndex])
 
   const settings: Settings = {

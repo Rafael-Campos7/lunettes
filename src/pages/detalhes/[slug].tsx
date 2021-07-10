@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import Prismic from '@prismicio/client'
 import { getPrismicClient } from '../../services/prismic'
 import { Information } from '../../components/Information'
 import { Background } from '../../components/Background/'
@@ -8,6 +7,12 @@ import { ProductDetails } from '../../components/ProductDetails'
 import { ProductCharacteristics } from '../../components/ProductCharacteristics'
 import { ListProducts } from '../../components/ListProducts'
 import { Container, ProductInformation, Description } from './styles'
+
+interface ProductRef  {
+  product_ref: {
+    id: string;
+  };
+}
 
 type Color = {
   name: string;
@@ -78,13 +83,13 @@ export default function Details({ product, relatedProducts }: DetailsProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const prismic = getPrismicClient(req)
-  const { slug } = params
-
+  const { slug } = query
+  
   const response = await prismic.getByUID('product', String(slug), {})
-
-  const relatedIds = response.data.associated.map(({ product_ref }) => product_ref.id)
+ 
+  const relatedIds = response.data.associated.map(({ product_ref }: ProductRef) => product_ref.id)
 
   const related = await prismic.getByIDs(relatedIds, {})
 

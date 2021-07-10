@@ -76,13 +76,16 @@ export default function Listing({ products, slug }: ListingProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const prismic = getPrismicClient(req)
 
+  const { slug } = query
+
   const response = await prismic.query(
-    Prismic.Predicates.at("document.tags", params.slug)
+    //@ts-ignore
+    Prismic.Predicates.at("document.tags", slug)
   )
-    
+  
   const products = response.results.map(({id, uid, data}) => {
     return {
       id: id,
@@ -108,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   return {
     props: {  
       products,
-      slug: params.slug,
+      slug: slug,
     },
   }
 }
