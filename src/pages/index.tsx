@@ -4,7 +4,7 @@ import Prismic from '@prismicio/client'
 import { getPrismicClient } from '../services/prismic'
 import { Information } from '../components/Information'
 import { ListProducts } from '../components/ListProducts'
-import { BackgroundContainer } from './style'
+import { BackgroundContainer } from '../styles/pages/home'
 
 type Image = {
   id: string;

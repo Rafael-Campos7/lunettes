@@ -32,6 +32,14 @@ type Filter = {
   price?: number;
 }
 
+type MaxPrice = {
+  type: string;
+  value: string;
+  price: number; 
+  active: boolean;
+  background: string;
+}
+
 export function loadColors(products: Product[]) {
   const productsColors = products.reduce((colors: Filter[], { images }) => {
     images.forEach((image) => {
@@ -81,7 +89,7 @@ export function loadModels(products: Product[]) {
 }
 
 export function loadPrices(products: Product[]){
-  const productsPrices = products.reduce((maxPrices: Filter[], { price }) => {
+  const productsPrices = products.reduce((maxPrices: MaxPrice[], { price }) => {
     const alreadyExists = maxPrices.find(maxPrice => maxPrice.price === price)
     if (alreadyExists) {
       return maxPrices;
@@ -99,5 +107,5 @@ export function loadPrices(products: Product[]){
     return maxPrices
   }, [])
 
-  return productsPrices.reverse()
+  return productsPrices.sort((a, b) => a.price - b.price)
 } 

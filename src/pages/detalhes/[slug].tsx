@@ -6,7 +6,7 @@ import { Background } from '../../components/Background/'
 import { ProductDetails } from '../../components/ProductDetails'
 import { ProductCharacteristics } from '../../components/ProductCharacteristics'
 import { ListProducts } from '../../components/ListProducts'
-import { Container, ProductInformation, Description } from './styles'
+import { Container, ProductInformation, Description } from '../../styles/pages/details'
 
 interface ProductRef  {
   product_ref: {

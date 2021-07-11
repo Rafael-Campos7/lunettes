@@ -3,12 +3,12 @@ import { useCallback, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Prismic from '@prismicio/client';
 import { getPrismicClient } from '../../services/prismic';
-import { filter } from './_helper/filter';
+import { filter } from '../../util/filter';
 import { Background } from '../../components/Background';
 import { Product } from '../../components/Product';
 import { Filter } from '../../components/Filter';
 import { BreadCrumb } from '../../components/BreadCrumb';
-import { Container, Content, ContentContainer } from "./styles";
+import { Container, Content, ContentContainer } from "../../styles/pages/listing";
 
 type Style = {
   name: string;
